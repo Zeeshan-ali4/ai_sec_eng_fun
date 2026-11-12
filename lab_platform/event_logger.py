@@ -16,11 +16,12 @@ class EventLogger:
     def __init__(self, database):
         self.database = database
 
-    def write(self, db, sid, kind, data=None, attempt=None):
+    def write(self, db, sid, kind, data=None, attempt=None, challenge_id="CH-001", mode="vulnerable"):
         if kind not in EVENT_TYPES:
             raise ValueError('Unknown event type')
         payload = json.dumps(data or {}, ensure_ascii=False)
         if len(payload.encode()) > 40000:
             raise ValueError('Evidence exceeds record limit')
-        db.execute('INSERT INTO events(timestamp,session_id,challenge_id,attempt,type,data) VALUES(?,?,?,?,?,?)',
-                   (utcnow(), opaque(sid), 'CH-001', attempt, kind, payload))
+        row = db.execute('SELECT challenge_id,mode FROM attempts WHERE session_id=? AND number=?', (opaque(sid), attempt)).fetchone() if attempt else None
+        db.execute('INSERT INTO events(timestamp,session_id,challenge_id,attempt,type,data,mode) VALUES(?,?,?,?,?,?,?)',
+                   (utcnow(), opaque(sid), row['challenge_id'] if row else challenge_id, attempt, kind, payload, row['mode'] if row else mode))

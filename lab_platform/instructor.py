@@ -10,7 +10,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', choices=['report', 'decide', 'reset-sales', 'reset-lab'])
     parser.add_argument('--attempt', type=int)
-    parser.add_argument('--decision', choices=STATUSES[1:])
+    parser.add_argument('--decision', choices=(*STATUSES[1:], 'Passed', 'Failed', 'Inconclusive'))
     parser.add_argument('--confirm', action='store_true')
     args = parser.parse_args()
     if args.command == 'decide' and (not args.attempt or not args.decision):
@@ -27,14 +27,15 @@ def main():
             if row is None:
                 parser.error('Completed attempt not found')
             db.execute('UPDATE attempts SET status=? WHERE id=?', (args.decision, args.attempt))
-            db.execute('INSERT INTO events(timestamp,session_id,challenge_id,attempt,type,data) VALUES(?,?,?,?,?,?)',
-                       (utcnow(), row['session_id'], 'CH-001', row['number'], 'instructor_decision',
-                        json.dumps(dict(evidence_id=args.attempt, decision=args.decision))))
+            db.execute('INSERT INTO events(timestamp,session_id,challenge_id,attempt,type,data,mode) VALUES(?,?,?,?,?,?,?)',
+                       (utcnow(), row['session_id'], row['challenge_id'], row['number'], 'instructor_decision',
+                        json.dumps(dict(evidence_id=args.attempt, decision=args.decision)), row['mode']))
         else:
             db.execute('DELETE FROM interests')
             if args.command == 'reset-lab':
                 db.execute('DELETE FROM events')
                 db.execute('DELETE FROM attempts')
+                db.execute('DELETE FROM challenge_state')
 
 
 if __name__ == '__main__':

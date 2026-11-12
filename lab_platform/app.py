@@ -1,6 +1,7 @@
 import secrets
 from flask import Flask, jsonify, render_template, request, session
 from werkzeug.exceptions import HTTPException
+from .challenges.registry import REGISTRY, validate
 from .database import Database
 from .event_logger import EventLogger
 from .challenge_service import ChallengeService
@@ -30,6 +31,9 @@ def create_app(test_config=None, client=None):
             session['sid'] = secrets.token_urlsafe(32)
         return session['sid']
 
+    def selection():
+        return session.get('challenge', 'CH-001'), session.get('mode', 'vulnerable')
+
     @app.before_request
     def local_origin():
         if request.method == 'POST':
@@ -57,7 +61,7 @@ def create_app(test_config=None, client=None):
         if not isinstance(data, dict) or set(data) != {'message'}:
             return jsonify(error='Send a JSON object containing only message.'), 400
         try:
-            return jsonify(reply=service.reply(sid(), data['message']))
+            return jsonify(reply=service.reply(sid(), data['message'], *selection()))
         except ValueError as exc:
             return jsonify(error=str(exc)), 400
         except OllamaError:
@@ -65,12 +69,12 @@ def create_app(test_config=None, client=None):
 
     @app.post('/api/reset')
     def reset():
-        service.reset(sid())
+        service.reset(sid(), *selection())
         return jsonify(status='reset')
 
     @app.get('/api/challenge')
     def evidence():
-        return jsonify(challenge.evidence(sid()))
+        return jsonify(challenge.evidence(sid(), *selection()))
 
     @app.post('/api/challenge/submit')
     def submit():
@@ -88,10 +92,47 @@ def create_app(test_config=None, client=None):
     def challenge_reset():
         # Logical reset preserves instructor evidence and monotonic attempt numbers.
         with service.lock:
-            service.reset(sid())
+            service.reset(sid(), *selection())
+            challenge.reset_state(sid(), *selection())
             with database.connect() as db:
-                challenge.logger.write(db, sid(), 'challenge_reset')
+                challenge.logger.write(db, sid(), 'challenge_reset', challenge_id=selection()[0], mode=selection()[1])
         return jsonify(status='Challenge restarted; evidence retained')
+
+    @app.get('/api/challenges')
+    def catalogue():
+        return jsonify(challenges=list(REGISTRY.values()), selected=dict(zip(('challenge_id', 'mode'), selection())))
+
+    @app.post('/api/challenge/select')
+    def select():
+        data = request.get_json(silent=True)
+        if not isinstance(data, dict) or set(data) != {'challenge_id', 'mode'} or not all(isinstance(v, str) for v in data.values()):
+            return jsonify(error='Send challenge_id and mode.'), 400
+        try:
+            validate(data['challenge_id'], data['mode'])
+        except ValueError as exc:
+            return jsonify(error=str(exc)), 400
+        with service.lock:
+            session['challenge'], session['mode'] = data['challenge_id'], data['mode']
+        return jsonify(status='Selected isolated challenge and mode')
+
+    @app.route('/api/challenge/document', methods=['GET', 'POST'])
+    def document():
+        selected, mode = selection()
+        if selected != 'CH-005':
+            return jsonify(error='Select CH-005 first.'), 400
+        with service.lock:
+            content = None
+            if request.method == 'POST':
+                data = request.get_json(silent=True)
+                if not isinstance(data, dict) or set(data) != {'id', 'content'} or data['id'] != 'support-001':
+                    return jsonify(error='Only support-001 content may be edited.'), 400
+                content = data['content']
+                if content is None:
+                    return jsonify(error='Document content must be text.'), 400
+            try:
+                return jsonify(challenge.document(sid(), mode, content))
+            except ValueError as exc:
+                return jsonify(error=str(exc)), 400
 
     @app.get('/api/health')
     def health():

@@ -1,5 +1,6 @@
 """Local transactional store. Hard page quota fails closed; no silent evidence eviction."""
 import sqlite3
+import os
 from contextlib import contextmanager
 from pathlib import Path
 from datetime import datetime, timezone
@@ -30,6 +31,26 @@ class Database:
                     vehicle_id TEXT NOT NULL, enquiry TEXT NOT NULL, status TEXT NOT NULL);
                 CREATE INDEX IF NOT EXISTS session_attempts ON attempts(session_id, id);
             ''')
+
+            # Additive, idempotent migration preserves all Milestone 2 evidence.
+            for table, name, definition in [
+                ('attempts', 'mode', "TEXT NOT NULL DEFAULT 'vulnerable'"),
+                ('attempts', 'evaluation', "TEXT NOT NULL DEFAULT 'Not evaluated'"),
+                ('attempts', 'evaluation_reason', "TEXT NOT NULL DEFAULT ''"),
+                ('attempts', 'controls', "TEXT NOT NULL DEFAULT '{}'"),
+                ('events', 'mode', "TEXT NOT NULL DEFAULT 'vulnerable'")]:
+                columns = {row['name'] for row in db.execute(f'PRAGMA table_info({table})')}
+                if name not in columns:
+                    db.execute(f'ALTER TABLE {table} ADD COLUMN {name} {definition}')
+            db.executescript("""
+                CREATE TABLE IF NOT EXISTS challenge_state (
+                    session_id TEXT NOT NULL, challenge_id TEXT NOT NULL, mode TEXT NOT NULL,
+                    canary TEXT NOT NULL, document TEXT NOT NULL, revision INTEGER NOT NULL DEFAULT 0,
+                    PRIMARY KEY(session_id, challenge_id, mode));
+                PRAGMA user_version=3;
+            """)
+
+        os.chmod(self.path, 0o600)
 
     @contextmanager
     def connect(self):

@@ -19,7 +19,10 @@ def test_isolation_reset_and_private_response(app, model):
     for browser in (one, two):
         response = browser.post('/api/chat', json={'message': 'hi'})
         assert response.json == {'reply': model.chat.return_value}
-        assert 'hi' not in response.headers.get('Set-Cookie', '')
+        # Random signatures can contain any short substring; inspect stored fields.
+        with browser.session_transaction() as cookie:
+            assert set(cookie) == {'sid'}
+            assert cookie['sid'] != 'hi'
     one.post('/api/reset')
     one.post('/api/chat', json={'message': 'new'})
     assert len(model.chat.call_args.args[0]) == 2

@@ -7,7 +7,7 @@ const reset = document.querySelector('#reset');
 let busy = false;
 function setBusy(value) {
   busy = value;
-  document.querySelectorAll('button').forEach(button => { button.disabled = value; });
+  document.querySelectorAll('button, select').forEach(button => { button.disabled = value; });
   input.disabled = value;
 }
 function append(role, text) {
@@ -87,16 +87,19 @@ async function refreshEvidence() {
   if (!response.ok) throw new Error('Could not load evidence.');
   const data = await response.json();
   document.querySelector('#attempt-count').textContent = data.attempt_count;
+  document.querySelector('#progress').textContent = data.progress.map(p => `${p.challenge_id} · ${p.mode} · ${p.evaluation}: ${p.attempts}`).join('\n') || 'No attempts yet.';
   latestAttempt = data.attempts.find(attempt => attempt.completed)?.id ?? null;
   const panel = document.querySelector('#evidence');
   panel.replaceChildren();
   for (const attempt of data.attempts) {
     const item = document.createElement('pre');
-    item.textContent = `${attempt.challenge_id} · Attempt ${attempt.number} · ${attempt.timestamp}
+    item.textContent = `${attempt.challenge_id} · ${attempt.mode} · Attempt ${attempt.number} · ${attempt.timestamp}
 Prompt: ${attempt.prompt}
 Response: ${attempt.response ?? '(request failed; no completed response)'}
 Tool requested: ${Boolean(attempt.tool_requested)} · Action executed: ${Boolean(attempt.action_executed)}
-Evaluation: ${attempt.status} · Submitted: ${Boolean(attempt.submitted)}`;
+Evaluation: ${attempt.evaluation} · ${attempt.evaluation_reason}
+Controls: ${attempt.controls}
+Instructor: ${attempt.status} · Submitted: ${Boolean(attempt.submitted)}`;
     panel.append(item);
   }
 }
@@ -106,7 +109,7 @@ document.querySelector('#submit-attempt').addEventListener('click', async () => 
   try {
     await request('/api/challenge/submit', {attempt_id: latestAttempt});
     await refreshEvidence();
-    status.textContent = 'Submitted for manual instructor review. No automatic success verdict.';
+    status.textContent = 'Submitted for instructor review. Automated checks and instructor decisions are shown separately.';
   } catch (error) { status.textContent = error.message; }
   finally { setBusy(false); }
 });
@@ -115,10 +118,68 @@ document.querySelector('#restart-challenge').addEventListener('click', async () 
   setBusy(true);
   try {
     await request('/api/challenge/reset', {});
+    await loadDocument();
     log.replaceChildren();
     await refreshEvidence();
     status.textContent = 'Challenge restarted. Attempt numbering and instructor evidence retained.';
   } catch (error) { status.textContent = error.message; }
   finally { setBusy(false); }
 });
-refreshEvidence().catch(error => { status.textContent = error.message; });
+initializeChallenges().catch(error => { status.textContent = error.message; });
+
+let challenges = [];
+const challengeSelect = document.querySelector('#challenge-select');
+const modeSelect = document.querySelector('#mode-select');
+async function loadDocument() {
+  document.querySelector('#document-editor').hidden = challengeSelect.value !== 'CH-005';
+  if (challengeSelect.value !== 'CH-005') return;
+  const response = await fetch('/api/challenge/document');
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.error);
+  document.querySelector('#document-content').value = data.content;
+  document.querySelector('#document-revision').textContent = `Revision ${data.revision} · ${data.classification}`;
+}
+function showChallenge() {
+  const c = challenges.find(c => c.id === challengeSelect.value);
+  document.querySelector('#challenge-title').textContent = `${c.id} · ${c.title}`;
+  document.querySelector('#challenge-description').textContent = `${c.difficulty} · ${c.learning_objective}`;
+  document.querySelector('#challenge-objective').textContent = `Objective: ${c.instructions} Expected legitimate behaviour: ${c.expected_behaviour}`;
+  document.querySelector('#active-mode').textContent = modeSelect.value;
+}
+async function initializeChallenges() {
+  const response = await fetch('/api/challenges');
+  const data = await response.json();
+  challenges = data.challenges;
+  for (const c of challenges) {
+    const option = document.createElement('option');
+    option.value = c.id; option.textContent = `${c.id} · ${c.title}`;
+    challengeSelect.append(option);
+  }
+  challengeSelect.value = data.selected.challenge_id;
+  modeSelect.value = data.selected.mode;
+  showChallenge();
+  await loadDocument();
+  await refreshEvidence();
+}
+async function selectConfiguration() {
+  if (busy) return;
+  setBusy(true);
+  try {
+    await request('/api/challenge/select', {challenge_id: challengeSelect.value, mode: modeSelect.value});
+    log.replaceChildren();
+    showChallenge(); await loadDocument(); await refreshEvidence();
+    status.textContent = 'Configuration selected. Its isolated conversation history is retained on the server.';
+  } catch (error) { status.textContent = error.message; }
+  finally { setBusy(false); }
+}
+challengeSelect.addEventListener('change', selectConfiguration);
+modeSelect.addEventListener('change', selectConfiguration);
+document.querySelector('#save-document').addEventListener('click', async () => {
+  if (busy) return;
+  setBusy(true);
+  try {
+    await request('/api/challenge/document', {id: 'support-001', content: document.querySelector('#document-content').value});
+    await loadDocument(); status.textContent = 'Session-specific document saved. Ask for a support ticket summary.';
+  } catch (error) { status.textContent = error.message; }
+  finally { setBusy(false); }
+});
