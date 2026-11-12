@@ -46,6 +46,20 @@ class OllamaClient:
             raise OllamaError('The local model returned an invalid response. Please retry.')
         return message['content']
 
+    def chat_with_tools(self, messages):
+        from .sales_tool import TOOLS
+        result = self._request('/api/chat', dict(model=self.model, messages=messages,
+                              stream=False, options=self.options, tools=TOOLS))
+        message = result.get('message')
+        if (not isinstance(message, dict) or message.get('role') != 'assistant'
+                or not isinstance(message.get('content', ''), str)
+                or len(message.get('content', '')) > 6000):
+            raise OllamaError('The local model returned an invalid response. Please retry.')
+        calls = message.get('tool_calls', [])
+        if not isinstance(calls, list) or len(calls) > 3 or len(json.dumps(calls).encode()) > 12000 or (not calls and not message.get('content', '').strip()):
+            raise OllamaError('The local model returned invalid tool calls. Please retry.')
+        return dict(role='assistant', content=message.get('content', ''), tool_calls=calls)
+
     def health(self):
         result = self._request('/api/tags', timeout=3)
         models = result.get('models')

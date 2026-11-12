@@ -12,5 +12,5 @@ def model():
 
 
 @pytest.fixture
-def app(model):
-    return create_app({'TESTING': True}, client=model)
+def app(model, tmp_path):
+    return create_app({'TESTING': True, 'DATABASE_PATH': str(tmp_path / 'lab.sqlite3')}, client=model)

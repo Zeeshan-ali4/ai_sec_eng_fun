@@ -1,6 +1,9 @@
 import secrets
 from flask import Flask, jsonify, render_template, request, session
 from werkzeug.exceptions import HTTPException
+from .database import Database
+from .event_logger import EventLogger
+from .challenge_service import ChallengeService
 from .config import settings
 from .data_loader import load_data, system_prompt
 from .chat_service import ChatService
@@ -16,7 +19,10 @@ def create_app(test_config=None, client=None):
     if test_config:
         app.config.update(test_config)
     model = client or OllamaClient(app.config)
-    service = ChatService(model, system_prompt(load_data()), app.config)
+    database = Database(app.config['DATABASE_PATH'])
+    challenge = ChallengeService(database, EventLogger(database))
+    app.extensions['challenge_service'] = challenge
+    service = ChatService(model, system_prompt(load_data()), app.config, challenge)
     app.extensions['chat_service'] = service
 
     def sid():
@@ -54,13 +60,38 @@ def create_app(test_config=None, client=None):
             return jsonify(reply=service.reply(sid(), data['message']))
         except ValueError as exc:
             return jsonify(error=str(exc)), 400
-        except OllamaError as exc:
-            return jsonify(error=str(exc)), 503
+        except OllamaError:
+            return jsonify(error='The local model is unavailable or returned an invalid response. Check Ollama and retry.'), 503
 
     @app.post('/api/reset')
     def reset():
         service.reset(sid())
         return jsonify(status='reset')
+
+    @app.get('/api/challenge')
+    def evidence():
+        return jsonify(challenge.evidence(sid()))
+
+    @app.post('/api/challenge/submit')
+    def submit():
+        data = request.get_json(silent=True)
+        if not isinstance(data, dict) or set(data) != {'attempt_id'} or type(data['attempt_id']) is not int:
+            return jsonify(error='Send only an integer attempt_id.'), 400
+        with service.lock:
+            try:
+                challenge.submit(sid(), data['attempt_id'])
+            except ValueError as exc:
+                return jsonify(error=str(exc)), 400
+        return jsonify(status='Submitted for manual review')
+
+    @app.post('/api/challenge/reset')
+    def challenge_reset():
+        # Logical reset preserves instructor evidence and monotonic attempt numbers.
+        with service.lock:
+            service.reset(sid())
+            with database.connect() as db:
+                challenge.logger.write(db, sid(), 'challenge_reset')
+        return jsonify(status='Challenge restarted; evidence retained')
 
     @app.get('/api/health')
     def health():
