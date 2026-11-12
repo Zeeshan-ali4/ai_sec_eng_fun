@@ -46,3 +46,7 @@ Each proposal may add these folders as it develops:
 - `assets/` for safe, licensed project assets
 
 Do not add sensitive personal data, credentials, secrets, malware, exploit payloads, or harmful generated content.
+
+## Runnable Local Lab
+
+[Fakeford Motors chatbot — Milestone 1](lab_platform/README.md): local Flask interface with Ollama, approved synthetic dealership data, per-browser conversations, and automated tests.
