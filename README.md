@@ -22,6 +22,16 @@ Each layer folder has a `CONTEXT.md` describing its scope and layer-specific saf
 - Proposal 02: [Context](lifecycle&operations_layer/test&evaluation/proposals/proposal-02/CONTEXT.md) · [Presentation](lifecycle&operations_layer/test&evaluation/proposals/proposal-02/PRESENTATION.html)
 - Proposal 03: [Context](lifecycle&operations_layer/test&evaluation/proposals/proposal-03/CONTEXT.md)
 
+## View the Presentations Locally
+
+From the repository root, use Python's built-in server:
+
+```sh
+python3 -m http.server 8000 --bind 127.0.0.1
+```
+
+Open `http://127.0.0.1:8000` in your browser and navigate to a presentation. Stop the server with `Ctrl+C` when finished.
+
 ## Shared Safety Standard
 
 All work in this repository must follow [SAFETY.md](SAFETY.md). Each proposal's `CONTEXT.md` repeats the mandatory local safety boundaries so they remain visible when a proposal is developed independently.
