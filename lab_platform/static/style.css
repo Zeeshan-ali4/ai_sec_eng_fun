@@ -2,3 +2,10 @@
 
 .challenge{padding:12px 24px;border-bottom:1px solid #ddd;max-height:32vh;overflow:auto;font-size:.85rem}.challenge h2{font-size:1rem}.challenge pre{white-space:pre-wrap;overflow-wrap:anywhere;border-top:1px solid #ddd;padding:12px 0}.challenge button{margin:4px;padding:8px}.challenge p{margin:6px 0}
 .challenge{flex-shrink:0;border-color:#39433d}.challenge button.secondary{font-size:12px}.challenge button.secondary::before{content:none}#conversation{min-height:80px}
+
+select { color: #eee; background: #20242a; border: 1px solid #64716e; padding: .5rem; max-width: 100%; margin: .3rem; }
+#document-content { width: 100%; display: block; margin: .5rem 0; }
+.challenge { max-height: 42vh; overflow-y: auto; flex-shrink: 0; }
+.challenge pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid #c3f57a; outline-offset: 3px; }

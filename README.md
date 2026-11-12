@@ -49,4 +49,4 @@ Do not add sensitive personal data, credentials, secrets, malware, exploit paylo
 
 ## Runnable Local Lab
 
-[Fakeford Motors chatbot — Milestone 1](lab_platform/README.md): local Flask interface with Ollama, approved synthetic dealership data, per-browser conversations, and automated tests.
+[Fakeford Motors security lab — Milestone 3](lab_platform/README.md): local Flask/Ollama lab with five challenges, vulnerable and hardened modes, isolated synthetic data, evidence and automated evaluation.
