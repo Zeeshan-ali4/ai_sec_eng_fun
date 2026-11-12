@@ -3,6 +3,9 @@ from collections import OrderedDict
 from threading import RLock
 from time import monotonic
 
+# Only the dealership role/commercial exercises use simulated model actions.
+MODEL_TOOL_CHALLENGES = frozenset({'CH-001', 'CH-002'})
+
 
 class ChatService:
     def __init__(self, client, prompt, config, challenge=None):
@@ -66,7 +69,7 @@ class ChatService:
                     controls['input_accepted'] = False
                     answer = 'Weak input filter rejected the request.'
                 else:
-                    answer = self._generate(sid, messages, attempt)
+                    answer = self._generate(sid, messages, attempt, challenge_id)
                     if challenge_id == 'CH-004' and state:
                         filtered = redact(answer, state['canary'])
                         controls['output_transformed'] = filtered != answer
@@ -100,12 +103,13 @@ class ChatService:
                 with self.challenge.database.connect() as db:
                     self.challenge.logger.write(db, sid, 'conversation_reset', challenge_id=challenge_id, mode=mode)
 
-    def _generate(self, sid, messages, attempt):
+    def _generate(self, sid, messages, attempt, challenge_id):
         from .ollama_client import OllamaClient, OllamaError
         from .sales_tool import validate, execute, NAME
         import json
         # Preserve compatibility with the original plain-chat adapter and test clients.
-        if not self.challenge or not isinstance(self.client, OllamaClient):
+        if (challenge_id not in MODEL_TOOL_CHALLENGES
+                or not self.challenge or not isinstance(self.client, OllamaClient)):
             return self.client.chat(messages)
         for round_number in range(4):
             if sum(len(m.get('content', '').encode()) for m in messages) > self.config['MAX_CONTEXT_BYTES'] + 8000:
