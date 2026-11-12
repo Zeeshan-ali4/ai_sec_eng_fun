@@ -24,7 +24,7 @@ function append(role, text) {
 }
 async function request(path, data) {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 135000);
+  const timer = setTimeout(() => controller.abort(), 510000);
   try {
     const response = await fetch(path, {method: 'POST', headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(data), signal: controller.signal});
@@ -45,10 +45,14 @@ form.addEventListener('submit', async event => {
     const result = await request('/api/chat', {message});
     append('assistant', result.reply);
     status.textContent = '';
+    await refreshEvidence();
   } catch (error) {
     status.textContent = error.name === 'AbortError' ? 'The request timed out. Reset before retrying if the conversation is out of sync.' : error.message;
     input.value = message;
-  } finally { setBusy(false); input.focus(); }
+  } finally {
+    await refreshEvidence().catch(() => {});
+    setBusy(false); input.focus();
+  }
 });
 input.addEventListener('keydown', event => {
   if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) {
@@ -67,7 +71,8 @@ reset.addEventListener('click', async () => {
     await request('/api/reset', {});
     log.replaceChildren();
     input.value = '';
-    status.textContent = 'Conversation cleared. Start a new enquiry.';
+    status.textContent = 'Conversation cleared. Evidence retained.';
+    await refreshEvidence();
   } catch (error) { status.textContent = error.message; }
   finally { setBusy(false); input.focus(); }
 });
@@ -75,3 +80,45 @@ fetch('/api/health').then(async response => {
   const data = await response.json();
   document.querySelector('#health').textContent = response.ok ? `● Local model · ${data.ollama.model}` : '○ Local model unavailable';
 }).catch(() => { document.querySelector('#health').textContent = '○ Application unavailable'; });
+
+let latestAttempt = null;
+async function refreshEvidence() {
+  const response = await fetch('/api/challenge');
+  if (!response.ok) throw new Error('Could not load evidence.');
+  const data = await response.json();
+  document.querySelector('#attempt-count').textContent = data.attempt_count;
+  latestAttempt = data.attempts.find(attempt => attempt.completed)?.id ?? null;
+  const panel = document.querySelector('#evidence');
+  panel.replaceChildren();
+  for (const attempt of data.attempts) {
+    const item = document.createElement('pre');
+    item.textContent = `${attempt.challenge_id} · Attempt ${attempt.number} · ${attempt.timestamp}
+Prompt: ${attempt.prompt}
+Response: ${attempt.response ?? '(request failed; no completed response)'}
+Tool requested: ${Boolean(attempt.tool_requested)} · Action executed: ${Boolean(attempt.action_executed)}
+Evaluation: ${attempt.status} · Submitted: ${Boolean(attempt.submitted)}`;
+    panel.append(item);
+  }
+}
+document.querySelector('#submit-attempt').addEventListener('click', async () => {
+  if (busy || latestAttempt === null) { status.textContent = 'Complete an attempt first.'; return; }
+  setBusy(true);
+  try {
+    await request('/api/challenge/submit', {attempt_id: latestAttempt});
+    await refreshEvidence();
+    status.textContent = 'Submitted for manual instructor review. No automatic success verdict.';
+  } catch (error) { status.textContent = error.message; }
+  finally { setBusy(false); }
+});
+document.querySelector('#restart-challenge').addEventListener('click', async () => {
+  if (busy) return;
+  setBusy(true);
+  try {
+    await request('/api/challenge/reset', {});
+    log.replaceChildren();
+    await refreshEvidence();
+    status.textContent = 'Challenge restarted. Attempt numbering and instructor evidence retained.';
+  } catch (error) { status.textContent = error.message; }
+  finally { setBusy(false); }
+});
+refreshEvidence().catch(error => { status.textContent = error.message; });

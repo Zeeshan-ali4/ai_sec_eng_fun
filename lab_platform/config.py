@@ -15,7 +15,7 @@ def settings():
     ctx = int(os.getenv('OLLAMA_NUM_CTX', '8192'))
     if ctx < 8192:
         raise ValueError('OLLAMA_NUM_CTX must be at least 8192 for the catalogue.')
-    return dict(OLLAMA_BASE_URL=address.rstrip('/'), OLLAMA_MODEL=os.getenv('OLLAMA_MODEL', 'llama3.1:8b'),
+    return dict(DATABASE_PATH=str(Path(__file__).resolve().parent / 'runtime' / 'lab.sqlite3'), OLLAMA_BASE_URL=address.rstrip('/'), OLLAMA_MODEL=os.getenv('OLLAMA_MODEL', 'llama3.1:8b'),
                 OLLAMA_TIMEOUT=float(os.getenv('OLLAMA_TIMEOUT', '120')),
                 OLLAMA_OPTIONS=dict(temperature=float(os.getenv('OLLAMA_TEMPERATURE', '0')),
                                     seed=int(os.getenv('OLLAMA_SEED', '42')), num_ctx=ctx, num_predict=768),
