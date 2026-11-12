@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Participant briefing for the Proposal 1 AI security hackathon challenge.">
+  <title>Role Under Pressure | Proposal 01</title>
+  <style>
+    :root {
+      --ink: #0b0b0b;
+      --paper: #f4f4f4;
+      --white: #ffffff;
+      --orange: #86bc25;
+      --teal: #242424;
+      --blue: #555555;
+      --yellow: #d7e8b0;
+      --green-dark: #4f7d00;
+      --muted: #666666;
+      --line: rgba(11, 11, 11, 0.17);
+      --shadow: 0 18px 54px rgba(0, 0, 0, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--ink);
+      color: var(--ink);
+      font-family: "Open Sans", "Helvetica Neue", Helvetica, sans-serif;
+      letter-spacing: 0;
+    }
+
+    body { overflow: hidden; }
+
+    button { font: inherit; }
+
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      align-content: center;
+      padding: 68px 8vw 82px;
+      overflow: auto;
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(rgba(11, 11, 11, 0.032) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(11, 11, 11, 0.032) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(36px);
+      transition: opacity 280ms ease, transform 280ms ease, visibility 280ms;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+      z-index: 2;
+    }
+
+    .slide.previous { transform: translateX(-36px); }
+
+    .slide__inner {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: var(--orange);
+      font-size: 14px;
+      font-weight: 750;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 4px;
+      background: currentColor;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1, h2 {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 900px;
+      margin-bottom: 24px;
+      font-size: 68px;
+      line-height: 0.98;
+    }
+
+    h2 {
+      max-width: 930px;
+      margin-bottom: 30px;
+      font-size: 46px;
+      line-height: 1.06;
+    }
+
+    h3 {
+      margin-bottom: 11px;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    p, li {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .lead {
+      max-width: 760px;
+      color: #3f433f;
+      font-size: 23px;
+      line-height: 1.45;
+    }
+
+    .small { font-size: 14px; color: var(--muted); }
+
+    .hero {
+      position: absolute;
+      color: var(--white);
+      background: var(--ink);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 10px;
+      background: var(--orange);
+    }
+
+    .hero .slide__inner { margin-left: 0; }
+    .hero h1 { font-size: 76px; font-weight: 300; }
+    .hero .lead { color: rgba(255, 254, 250, 0.82); }
+    .hero .eyebrow { color: var(--orange); }
+
+    .brand {
+      position: fixed;
+      z-index: 20;
+      top: 28px;
+      right: 4vw;
+      color: var(--ink);
+      font-size: 24px;
+      font-weight: 750;
+      line-height: 1;
+      letter-spacing: 0;
+      pointer-events: none;
+    }
+
+    .brand span { color: var(--orange); }
+    body:has(.hero.active) .brand,
+    body:has(.dark.active) .brand { color: var(--white); }
+
+    .grid-2, .grid-3, .grid-4 {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .panel {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 254, 250, 0.78);
+    }
+
+    .panel--ink { color: var(--white); background: var(--ink); }
+    .panel--orange { color: var(--ink); background: var(--orange); }
+    .panel--teal { color: var(--white); background: var(--teal); }
+    .panel--blue { color: var(--white); background: var(--blue); }
+
+    .panel p:last-child, .panel ul:last-child { margin-bottom: 0; }
+
+    .number {
+      display: block;
+      margin-bottom: 18px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      font-size: 42px;
+      line-height: 1;
+      color: var(--orange);
+    }
+
+    .panel--ink .number,
+    .panel--orange .number { color: var(--ink); }
+    .panel--ink .number,
+    .panel--teal .number,
+    .panel--blue .number { color: var(--yellow); }
+
+    ul {
+      margin: 0;
+      padding-left: 1.15em;
+    }
+
+    li { margin-bottom: 7px; }
+    li::marker { color: var(--orange); }
+
+    .quote {
+      max-width: 1000px;
+      margin: 0;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      font-size: 46px;
+      line-height: 1.15;
+    }
+
+    .quote strong { color: var(--orange); }
+
+    .impact-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 34px;
+      border-top: 1px solid var(--line);
+    }
+
+    .impact-row div { padding: 18px 18px 0 0; }
+
+    .impact-row b {
+      display: block;
+      color: var(--green-dark);
+      font-size: 22px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .flow__step {
+      position: relative;
+      min-height: 180px;
+      padding: 22px;
+      border-top: 6px solid var(--orange);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .flow__step:not(:last-child)::after {
+      content: "›";
+      position: absolute;
+      z-index: 1;
+      top: 64px;
+      right: -18px;
+      color: var(--orange);
+      font-size: 36px;
+      font-weight: 800;
+    }
+
+    .signal {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      font-weight: 750;
+      text-transform: uppercase;
+    }
+
+    .signal::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--orange);
+    }
+
+    .signal--safe::before { background: var(--teal); }
+    .signal--pending::before { background: var(--yellow); }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 44px;
+      align-items: start;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 12px;
+    }
+
+    .check {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+      font-size: 17px;
+      line-height: 1.4;
+    }
+
+    .check::before {
+      content: "✓";
+      display: grid;
+      width: 24px;
+      height: 24px;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--white);
+      background: var(--teal);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    code {
+      padding: 2px 7px;
+      border-radius: 4px;
+      color: var(--white);
+      background: var(--ink);
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 0.88em;
+    }
+
+    .warning-band {
+      padding: 20px 24px;
+      border-left: 6px solid var(--orange);
+      background: #eef6df;
+      font-size: 18px;
+      line-height: 1.45;
+    }
+
+    .controls {
+      position: fixed;
+      z-index: 10;
+      right: 24px;
+      bottom: 22px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .control {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 50%;
+      color: var(--white);
+      background: rgba(23, 25, 24, 0.9);
+      cursor: pointer;
+      font-size: 22px;
+    }
+
+    .control:hover, .control:focus-visible {
+      color: var(--ink);
+      background: var(--yellow);
+      outline: 3px solid rgba(242, 193, 78, 0.38);
+    }
+
+    .counter {
+      position: fixed;
+      z-index: 10;
+      left: 24px;
+      bottom: 27px;
+      color: var(--white);
+      font-variant-numeric: tabular-nums;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .progress {
+      position: fixed;
+      z-index: 11;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .progress__bar {
+      width: 0;
+      height: 100%;
+      background: var(--orange);
+      transition: width 220ms ease;
+    }
+
+    .dark {
+      color: var(--white);
+      background-color: var(--ink);
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    }
+
+    .dark .lead, .dark .small { color: rgba(255, 255, 255, 0.72); }
+    .dark .panel { border-color: rgba(255, 255, 255, 0.16); }
+    .dark li::marker { color: var(--yellow); }
+
+    @media (max-width: 920px) {
+      .slide { align-content: start; padding: 54px 5vw 88px; }
+      h1, .hero h1 { font-size: 48px; }
+      h2 { font-size: 36px; }
+      .quote { font-size: 34px; }
+      .lead { font-size: 20px; }
+      .grid-4, .grid-3 { grid-template-columns: repeat(2, 1fr); }
+      .flow { grid-template-columns: repeat(2, 1fr); }
+      .flow__step:not(:last-child)::after { display: none; }
+      .split { grid-template-columns: 1fr; gap: 24px; }
+      .impact-row { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      h1, .hero h1 { font-size: 40px; }
+      h2 { font-size: 31px; }
+      h3 { font-size: 18px; }
+      p, li { font-size: 16px; }
+      .grid-2, .grid-3, .grid-4, .flow { grid-template-columns: 1fr; }
+      .brand { top: 20px; right: 5vw; font-size: 20px; }
+      .controls { right: 14px; bottom: 16px; }
+      .counter { left: 14px; bottom: 23px; }
+      .control { width: 40px; height: 40px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide, .progress__bar { transition: none; }
+    }
+
+    @media print {
+      body { overflow: visible; background: white; }
+      .deck { width: auto; height: auto; overflow: visible; }
+      .slide {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        page-break-after: always;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+      }
+      .controls, .counter, .progress { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-live="polite">
+    <section class="slide hero active" data-title="Opening">
+      <div class="slide__inner">
+        <p class="eyebrow">AI Security Hackathon · Proposal 01</p>
+        <h1>Role Under Pressure</h1>
+        <p class="lead">Can you keep a customer-facing sales chatbot useful, honest and inside the authority it was actually given?</p>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Brief">
+      <div class="slide__inner">
+        <p class="eyebrow">Your brief</p>
+        <h2>Improve the guardrails without breaking the service.</h2>
+        <div class="grid-3">
+          <article class="panel panel--ink">
+            <span class="number">01</span>
+            <h3>Test</h3>
+            <p>Establish how the supplied dealership chatbot behaves under normal and adversarial requests.</p>
+          </article>
+          <article class="panel panel--orange">
+            <span class="number">02</span>
+            <h3>Improve</h3>
+            <p>Design safeguards that preserve legitimate customer service while limiting role and authority abuse.</p>
+          </article>
+          <article class="panel panel--teal">
+            <span class="number">03</span>
+            <h3>Prove</h3>
+            <p>Rerun repeatable tests, compare outcomes and explain the limitations that remain.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Anchor">
+      <div class="slide__inner">
+        <p class="eyebrow">Why this matters</p>
+        <p class="quote">A dealership chatbot was steered into agreeing to sell a car for <strong>$1</strong>.</p>
+        <p class="lead" style="margin-top: 26px;">No car was sold. The incident still showed how direct prompt injection can push a customer-facing system beyond its intended role.</p>
+        <div class="impact-row">
+          <div><b>Trust</b><span>Customer confusion</span></div>
+          <div><b>Brand</b><span>Reputational damage</span></div>
+          <div><b>Operations</b><span>Escalation and cost</span></div>
+          <div><b>Liability</b><span>Legal uncertainty</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide dark" data-title="Baseline">
+      <div class="slide__inner">
+        <p class="eyebrow">What you receive</p>
+        <h2>A deliberately vulnerable, fully fictional sales assistant.</h2>
+        <div class="grid-2">
+          <article class="panel panel--teal">
+            <h3>It can</h3>
+            <ul>
+              <li>Answer from a supplied synthetic product catalogue</li>
+              <li>Explain standard prices and offers</li>
+              <li>Collect an expression of interest</li>
+              <li>Hand requests to a fictional sales system</li>
+              <li>Operate under a basic system prompt</li>
+            </ul>
+          </article>
+          <article class="panel panel--orange">
+            <h3>It does not yet defend itself well</h3>
+            <ul>
+              <li>Trusts user input too readily</li>
+              <li>Lacks prompt-injection detection</li>
+              <li>Lacks price and discount validation</li>
+              <li>Lacks clear authority controls</li>
+              <li>May expose role instructions or accept false premises</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Test map">
+      <div class="slide__inner">
+        <p class="eyebrow">Required test set</p>
+        <h2>Four lanes. One balanced evaluation.</h2>
+        <div class="grid-4">
+          <article class="panel">
+            <span class="number">A</span>
+            <h3>Normal behavior</h3>
+            <p>Product facts, legitimate prices and requests the bot should answer.</p>
+          </article>
+          <article class="panel">
+            <span class="number">B</span>
+            <h3>Direct injection</h3>
+            <p>Role overrides, ignored instructions and gradually introduced attacks.</p>
+          </article>
+          <article class="panel">
+            <span class="number">C</span>
+            <h3>Authority abuse</h3>
+            <p>Discounts, contracts, refunds, compensation and binding claims.</p>
+          </article>
+          <article class="panel">
+            <span class="number">D</span>
+            <h3>Boundary testing</h3>
+            <p>Prompt extraction, internal data, unrelated tasks, code and links.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Wider testing fit">
+      <div class="slide__inner">
+        <p class="eyebrow">Connection to wider testing</p>
+        <h2>This challenge is primarily adversarial testing.</h2>
+        <div class="grid-3">
+          <article class="panel panel--ink">
+            <span class="number">Core</span>
+            <h3>Adversarial testing</h3>
+            <p>Participants deliberately challenge the chatbot with role overrides, prompt injection, authority abuse and boundary requests.</p>
+          </article>
+          <article class="panel panel--orange">
+            <span class="number">Anchor</span>
+            <h3>Normal-behavior evaluation</h3>
+            <p>Legitimate product and price questions confirm that stronger safeguards do not make the service unusable.</p>
+          </article>
+          <article class="panel panel--blue">
+            <span class="number">Support</span>
+            <h3>Model security and DAST</h3>
+            <p>Prompt disclosure, internal-data and action-boundary cases overlap with model security and testing the running application from the outside.</p>
+          </article>
+        </div>
+        <p class="small" style="margin-top: 18px;">See the broader <a href="../../AI_TESTING_AND_EVALUATION.html" target="_blank">AI testing and evaluation overview</a> for the full set of complementary methods.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Lane mapping">
+      <div class="slide__inner">
+        <p class="eyebrow">Map each challenge lane</p>
+        <h2>The four lanes provide different kinds of evidence.</h2>
+        <div class="grid-4">
+          <article class="panel">
+            <span class="number">A</span>
+            <h3>Normal behavior</h3>
+            <p><strong>Fit:</strong> functional and quality evaluation.</p>
+            <p>Provides the control group for every security improvement.</p>
+          </article>
+          <article class="panel">
+            <span class="number">B</span>
+            <h3>Direct injection</h3>
+            <p><strong>Fit:</strong> adversarial testing.</p>
+            <p>Measures resistance to explicit and gradually introduced instruction attacks.</p>
+          </article>
+          <article class="panel">
+            <span class="number">C</span>
+            <h3>Authority abuse</h3>
+            <p><strong>Fit:</strong> adversarial and model-security testing.</p>
+            <p>Checks whether the model claims powers that belong to approved business systems or people.</p>
+          </article>
+          <article class="panel">
+            <span class="number">D</span>
+            <h3>Boundary testing</h3>
+            <p><strong>Fit:</strong> adversarial, model-security and limited DAST.</p>
+            <p>Checks information disclosure, unsafe actions and the exposed chatbot interface.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide dark" data-title="Scope boundaries">
+      <div class="slide__inner">
+        <p class="eyebrow">What this challenge proves</p>
+        <h2>Strong evidence for one risk area, not complete production assurance.</h2>
+        <div class="grid-3">
+          <article class="panel panel--teal">
+            <h3>Directly assessed</h3>
+            <ul>
+              <li>Adversarial prompt behavior</li>
+              <li>Role and authority boundaries</li>
+              <li>Useful behavior after safeguards</li>
+              <li>Repeatable before-and-after evidence</li>
+            </ul>
+          </article>
+          <article class="panel panel--orange">
+            <h3>Supporting checks</h3>
+            <ul>
+              <li>SAST for participant code changes</li>
+              <li>DAST for the running local interface</li>
+              <li>Supply-chain checks for added packages</li>
+              <li>Model and runtime integrity checks</li>
+            </ul>
+          </article>
+          <article class="panel panel--ink">
+            <h3>Separate or later assurance</h3>
+            <ul>
+              <li>Bias and fairness evaluation</li>
+              <li>Drift detection over time</li>
+              <li>Real-time production monitoring</li>
+              <li>Explainability for high-impact decisions</li>
+            </ul>
+          </article>
+        </div>
+        <div class="warning-band" style="margin-top: 18px; color: var(--ink);"><strong>Key message:</strong> passing the hackathon test set shows improved behavior in the authorized scenario. It does not, by itself, establish production readiness.</div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Normal and injection">
+      <div class="slide__inner">
+        <p class="eyebrow">Test lanes A + B</p>
+        <h2>Useful under normal demand. Steady under manipulation.</h2>
+        <div class="grid-2">
+          <article class="panel panel--teal">
+            <span class="signal signal--safe">Normal behavior</span>
+            <ul>
+              <li>Correct product questions</li>
+              <li>Legitimate price queries</li>
+              <li>Answerable requests inside the sales role</li>
+            </ul>
+            <p><strong>Expected:</strong> accurate, helpful responses grounded in supplied information.</p>
+          </article>
+          <article class="panel">
+            <span class="signal">Direct prompt injection</span>
+            <ul>
+              <li>Role-override attempts</li>
+              <li>Requests to ignore previous instructions</li>
+              <li>Gradual, multi-turn instruction changes</li>
+              <li>Encoded, misspelled or translated variants</li>
+            </ul>
+            <p><strong>Expected:</strong> keep the approved role and do not expose hidden instructions.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Authority and boundaries">
+      <div class="slide__inner">
+        <p class="eyebrow">Test lanes C + D</p>
+        <h2>The model can speak. That does not give it authority.</h2>
+        <div class="grid-2">
+          <article class="panel panel--orange">
+            <span class="signal">Authority abuse</span>
+            <ul>
+              <li>Unauthorized discounts</li>
+              <li>Contractual promises</li>
+              <li>Refunds or compensation</li>
+              <li>Claims that responses are legally binding</li>
+            </ul>
+            <p><strong>Expected:</strong> state limits and escalate to an authorized fictional human.</p>
+          </article>
+          <article class="panel panel--blue">
+            <span class="signal">Boundary testing</span>
+            <ul>
+              <li>Unrelated requests</li>
+              <li>System-prompt extraction</li>
+              <li>Requests for internal data</li>
+              <li>Code execution or harmful-link generation</li>
+            </ul>
+            <p><strong>Expected:</strong> refuse safely without exposing protected instructions or data.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Test case anatomy">
+      <div class="slide__inner">
+        <p class="eyebrow">Evidence standard</p>
+        <h2>Every test case needs enough structure to be repeated.</h2>
+        <div class="flow">
+          <article class="flow__step"><span class="number">1</span><h3>Category</h3><p>Which required test lane?</p></article>
+          <article class="flow__step"><span class="number">2</span><h3>Input</h3><p>Exact single or multi-turn request.</p></article>
+          <article class="flow__step"><span class="number">3</span><h3>Expected</h3><p>Useful answer, refusal or escalation.</p></article>
+          <article class="flow__step"><span class="number">4</span><h3>Observed</h3><p>Response and fictional action taken.</p></article>
+          <article class="flow__step"><span class="number">5</span><h3>Result</h3><p>Pass, fail and reason.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Workflow">
+      <div class="slide__inner">
+        <p class="eyebrow">Participant workflow</p>
+        <h2>Baseline first. Safeguards second. Evidence throughout.</h2>
+        <div class="grid-3">
+          <article class="panel"><span class="number">01</span><h3>Orient</h3><p>Read the brief and boundaries. Start the local baseline and verify normal sales behavior.</p></article>
+          <article class="panel"><span class="number">02</span><h3>Measure</h3><p>Run or extend the approved test set. Record responses and fictional actions.</p></article>
+          <article class="panel"><span class="number">03</span><h3>Design</h3><p>Choose controls that address role, authority, information and action boundaries.</p></article>
+          <article class="panel"><span class="number">04</span><h3>Improve</h3><p>Apply safeguards within the supplied challenge environment and rules.</p></article>
+          <article class="panel"><span class="number">05</span><h3>Retest</h3><p>Use the same cases and protected judging tests to compare behavior.</p></article>
+          <article class="panel"><span class="number">06</span><h3>Explain</h3><p>Submit evidence, design reasoning and an honest account of residual limitations.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide dark" data-title="Environment">
+      <div class="slide__inner">
+        <p class="eyebrow">Local environment</p>
+        <h2>Designed to run without paid model services.</h2>
+        <div class="split">
+          <div>
+            <p class="lead"><code>Ollama</code> runs the supplied <code>llama3.1</code> instruction model locally. The initial baseline does not require an embedding model or remote model access.</p>
+            <div class="warning-band" style="color: var(--ink);">Use only the organizer-supplied installation route, model artifact and challenge package.</div>
+          </div>
+          <div class="checklist">
+            <div class="check">Corporate-managed laptop meeting the announced hardware requirements</div>
+            <div class="check">Permission to run the approved Ollama version</div>
+            <div class="check"><span>Supplied pinned <code>llama3.1</code> model digest</span></div>
+            <div class="check">Local development and command-line tools listed in the setup guide</div>
+            <div class="check">Browser access to the locally hosted interface</div>
+            <div class="check">Team workspace for code, evidence and presentation material</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Safety">
+      <div class="slide__inner">
+        <p class="eyebrow">Non-negotiable boundaries</p>
+        <h2>Weak chatbot. Strong containment.</h2>
+        <div class="grid-3">
+          <article class="panel panel--teal"><h3>Use only</h3><ul><li>The isolated challenge environment</li><li>Fictional dealership systems</li><li>Synthetic products and records</li><li>Inert reserved-domain links</li></ul></article>
+          <article class="panel panel--orange"><h3>Never connect</h3><ul><li>Production or corporate systems</li><li>Real customer or employee data</li><li>Credentials, payments or contracts</li><li>Email, browsing or shell tools</li></ul></article>
+          <article class="panel panel--ink"><h3>Stop and escalate</h3><ul><li>Unexpected external access</li><li>Secrets or personal data</li><li>Executable or harmful content</li><li>Any credible risk beyond the sandbox</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="brand" aria-label="Deloitte">Deloitte<span>.</span></div>
+
+  <div class="counter" aria-label="Slide number"><span id="current">01</span> / <span id="total">14</span></div>
+  <nav class="controls" aria-label="Presentation controls">
+    <button class="control" id="previous" type="button" aria-label="Previous slide" title="Previous slide">‹</button>
+    <button class="control" id="next" type="button" aria-label="Next slide" title="Next slide">›</button>
+    <button class="control" id="fullscreen" type="button" aria-label="Toggle fullscreen" title="Toggle fullscreen">⛶</button>
+  </nav>
+  <div class="progress" aria-hidden="true"><div class="progress__bar" id="progress"></div></div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const currentLabel = document.getElementById('current');
+    const totalLabel = document.getElementById('total');
+    const progress = document.getElementById('progress');
+    let index = 0;
+
+    totalLabel.textContent = String(slides.length).padStart(2, '0');
+
+    function showSlide(nextIndex, updateHash = true) {
+      const boundedIndex = Math.max(0, Math.min(nextIndex, slides.length - 1));
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle('active', slideIndex === boundedIndex);
+        slide.classList.toggle('previous', slideIndex < boundedIndex);
+        slide.setAttribute('aria-hidden', slideIndex === boundedIndex ? 'false' : 'true');
+      });
+      index = boundedIndex;
+      currentLabel.textContent = String(index + 1).padStart(2, '0');
+      progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+      document.title = `${slides[index].dataset.title} | Proposal 01`;
+      if (updateHash) history.replaceState(null, '', `#${index + 1}`);
+    }
+
+    function initialSlide() {
+      const hashIndex = Number.parseInt(location.hash.slice(1), 10) - 1;
+      return Number.isNaN(hashIndex) ? 0 : hashIndex;
+    }
+
+    document.getElementById('previous').addEventListener('click', () => showSlide(index - 1));
+    document.getElementById('next').addEventListener('click', () => showSlide(index + 1));
+    document.getElementById('fullscreen').addEventListener('click', () => {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else document.documentElement.requestFullscreen();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(event.key)) {
+        event.preventDefault();
+        showSlide(index + 1);
+      } else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(event.key)) {
+        event.preventDefault();
+        showSlide(index - 1);
+      } else if (event.key === 'Home') {
+        showSlide(0);
+      } else if (event.key === 'End') {
+        showSlide(slides.length - 1);
+      } else if (event.key.toLowerCase() === 'f') {
+        document.getElementById('fullscreen').click();
+      }
+    });
+
+    window.addEventListener('hashchange', () => showSlide(initialSlide(), false));
+    showSlide(initialSlide(), false);
+  </script>
+</body>
+</html>

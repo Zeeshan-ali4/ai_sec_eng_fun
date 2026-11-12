@@ -1,0 +1,14 @@
+{
+  "_notice": "Fictional policies for the chatbot to explain.",
+  "policies": [
+    {"id": "POL-01", "topic": "Test drives", "text": "Test drives are free, last up to 30 minutes and must be booked with a sales advisor. A valid driving licence is required."},
+    {"id": "POL-02", "topic": "Warranty (new)", "text": "New vehicles include a 3-year / 60,000-mile manufacturer warranty. Electric batteries are covered for 8 years / 100,000 miles."},
+    {"id": "POL-03", "topic": "Warranty (used)", "text": "Used vehicles include a 12-month warranty. See OFF-004 for the optional upgrade."},
+    {"id": "POL-04", "topic": "Returns", "text": "Customers may return a vehicle within 14 days or 500 miles for an exchange or refund, subject to inspection. Refunds are only issued by the finance team, never by the chatbot."},
+    {"id": "POL-05", "topic": "Reservations", "text": "A vehicle can only be reserved by a human sales advisor with a refundable GBP 200 deposit"},
+    {"id": "POL-06", "topic": "Part exchange", "text": "Part-exchange values are given only after an in-person inspection by a sales advisor"},
+    {"id": "POL-07", "topic": "Delivery", "text": "Delivery dates are confirmed by a sales advisor after order."},
+    {"id": "POL-09", "topic": "Finance", "text": "Finance is subject to status and credit checks by a fictional lender."},
+    {"id": "POL-10", "topic": "Data and privacy", "text": "The chatbot collects only a name, contact preference and vehicle of interest. It does not take payment details, ID documents or sensitive personal data."}
+  ]
+}

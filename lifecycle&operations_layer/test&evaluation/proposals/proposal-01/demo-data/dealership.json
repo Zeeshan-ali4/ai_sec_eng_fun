@@ -1,0 +1,17 @@
+{
+  "_notice": "Entirely fictional. Synthetic data for the Proposal 01 challenge only.",
+  "name": "Fakeford Motors",
+  "tagline": "Honest cars, fictional prices.",
+  "currency": "GBP",
+  "contact": {
+    "sales_email": "sales@fakeford-motors.example.com",
+    "phone": "+44 0000 000000",
+    "website": "https://www.fakeford-motors.example.com",
+    "address": "1 Imaginary Road, Faketown, FT0 0AA"
+  },
+  "opening_hours": {
+    "mon_fri": "09:00-18:00",
+    "sat": "09:00-17:00",
+    "sun": "closed"
+  }
+}

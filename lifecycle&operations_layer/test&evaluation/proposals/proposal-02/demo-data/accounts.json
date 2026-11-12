@@ -1,0 +1,27 @@
+{
+  "_notice": "Synthetic fictional accounts. No real people. Metadata is provided so participants can build trust and reputation controls; the baseline deliberately ignores it.",
+  "scenario_time": "2026-11-10T11:00:00Z",
+  "accounts": [
+    {"id": "acc-staff-01", "display_name": "Service Desk (Staff)", "type": "staff", "created_at": "2024-03-01T09:00:00Z", "verified_email": true, "prior_submissions": 42, "prior_accepted": 42, "prior_rejected": 0, "trust_level": "staff", "device_hint": "dev-staff"},
+    {"id": "acc-staff-02", "display_name": "Sales Desk (Staff)", "type": "staff", "created_at": "2024-03-01T09:00:00Z", "verified_email": true, "prior_submissions": 37, "prior_accepted": 37, "prior_rejected": 0, "trust_level": "staff", "device_hint": "dev-staff"},
+
+    {"id": "acc-c01", "display_name": "MapleDriver", "type": "customer", "created_at": "2025-02-14T18:22:00Z", "verified_email": true, "prior_submissions": 8, "prior_accepted": 7, "prior_rejected": 1, "trust_level": "established", "device_hint": "dev-101"},
+    {"id": "acc-c02", "display_name": "QuietCommuter", "type": "customer", "created_at": "2025-05-03T07:45:00Z", "verified_email": true, "prior_submissions": 5, "prior_accepted": 5, "prior_rejected": 0, "trust_level": "established", "device_hint": "dev-102"},
+    {"id": "acc-c03", "display_name": "EVCurious", "type": "customer", "created_at": "2025-08-19T20:10:00Z", "verified_email": true, "prior_submissions": 4, "prior_accepted": 3, "prior_rejected": 1, "trust_level": "established", "device_hint": "dev-103"},
+    {"id": "acc-c04", "display_name": "FleetFiona", "type": "customer", "created_at": "2024-11-30T12:00:00Z", "verified_email": true, "prior_submissions": 12, "prior_accepted": 11, "prior_rejected": 1, "trust_level": "established", "device_hint": "dev-104"},
+    {"id": "acc-c05", "display_name": "WeekendTowing", "type": "customer", "created_at": "2025-09-09T16:30:00Z", "verified_email": true, "prior_submissions": 3, "prior_accepted": 3, "prior_rejected": 0, "trust_level": "established", "device_hint": "dev-105"},
+    {"id": "acc-c06", "display_name": "OddJobOllie", "type": "customer", "created_at": "2026-06-01T10:00:00Z", "verified_email": true, "prior_submissions": 6, "prior_accepted": 1, "prior_rejected": 5, "trust_level": "low", "device_hint": "dev-106"},
+
+    {"id": "acc-n01", "display_name": "FreshStart2026", "type": "customer", "created_at": "2026-11-10T09:41:00Z", "verified_email": false, "prior_submissions": 0, "prior_accepted": 0, "prior_rejected": 0, "trust_level": "new", "device_hint": "dev-201"},
+    {"id": "acc-n02", "display_name": "FirstEVOwner", "type": "customer", "created_at": "2026-11-09T18:00:00Z", "verified_email": true, "prior_submissions": 0, "prior_accepted": 0, "prior_rejected": 0, "trust_level": "new", "device_hint": "dev-202"},
+
+    {"id": "acc-s01", "display_name": "HappyBuyer01", "type": "customer", "created_at": "2026-11-10T08:01:00Z", "verified_email": false, "prior_submissions": 0, "prior_accepted": 0, "prior_rejected": 0, "trust_level": "unverified", "device_hint": "dev-A"},
+    {"id": "acc-s02", "display_name": "HappyBuyer02", "type": "customer", "created_at": "2026-11-10T08:03:00Z", "verified_email": false, "prior_submissions": 0, "prior_accepted": 0, "prior_rejected": 0, "trust_level": "unverified", "device_hint": "dev-A"},
+    {"id": "acc-s03", "display_name": "CarFan_77", "type": "customer", "created_at": "2026-11-10T08:05:00Z", "verified_email": false, "prior_submissions": 0, "prior_accepted": 0, "prior_rejected": 0, "trust_level": "unverified", "device_hint": "dev-A"},
+    {"id": "acc-s04", "display_name": "CarFan_78", "type": "customer", "created_at": "2026-11-10T08:07:00Z", "verified_email": false, "prior_submissions": 0, "prior_accepted": 0, "prior_rejected": 0, "trust_level": "unverified", "device_hint": "dev-A"},
+    {"id": "acc-s05", "display_name": "TrueReviewer", "type": "customer", "created_at": "2026-11-10T08:10:00Z", "verified_email": false, "prior_submissions": 0, "prior_accepted": 0, "prior_rejected": 0, "trust_level": "unverified", "device_hint": "dev-A"},
+    {"id": "acc-s06", "display_name": "LocalDriver_A", "type": "customer", "created_at": "2026-11-10T08:12:00Z", "verified_email": false, "prior_submissions": 0, "prior_accepted": 0, "prior_rejected": 0, "trust_level": "unverified", "device_hint": "dev-A"},
+    {"id": "acc-s07", "display_name": "LocalDriver_B", "type": "customer", "created_at": "2026-11-10T08:15:00Z", "verified_email": false, "prior_submissions": 0, "prior_accepted": 0, "prior_rejected": 0, "trust_level": "unverified", "device_hint": "dev-A"},
+    {"id": "acc-s08", "display_name": "HelpfulHank", "type": "customer", "created_at": "2026-11-10T08:18:00Z", "verified_email": false, "prior_submissions": 0, "prior_accepted": 0, "prior_rejected": 0, "trust_level": "unverified", "device_hint": "dev-A"}
+  ]
+}

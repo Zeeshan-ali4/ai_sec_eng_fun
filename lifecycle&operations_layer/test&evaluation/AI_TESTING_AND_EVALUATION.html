@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plain-English overview of security testing and evaluation for AI-enabled technology.">
+  <title>Testing AI-Enabled Technology</title>
+  <style>
+    :root {
+      --black: #0b0b0b;
+      --charcoal: #242424;
+      --grey-700: #4b4b4b;
+      --grey-500: #747474;
+      --grey-200: #d8d8d8;
+      --grey-100: #f1f1f1;
+      --white: #ffffff;
+      --green: #86bc25;
+      --green-dark: #4f7d00;
+      --green-pale: #eaf3d8;
+      --amber-pale: #fff4d5;
+      --line: rgba(11, 11, 11, 0.16);
+      --shadow: 0 18px 54px rgba(0, 0, 0, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      min-height: 100%;
+      margin: 0;
+      background: var(--black);
+      color: var(--black);
+      font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      letter-spacing: 0;
+    }
+
+    body { overflow: hidden; }
+    button { font: inherit; }
+
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      align-content: center;
+      padding: 70px 7vw 80px;
+      overflow: auto;
+      background-color: var(--grey-100);
+      background-image:
+        linear-gradient(rgba(11, 11, 11, 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(11, 11, 11, 0.028) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(34px);
+      transition: opacity 240ms ease, transform 240ms ease, visibility 240ms;
+    }
+
+    .slide.active {
+      z-index: 2;
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+
+    .slide.previous { transform: translateX(-34px); }
+
+    .slide__inner {
+      width: min(1220px, 100%);
+      margin: 0 auto;
+    }
+
+    .hero, .dark {
+      color: var(--white);
+      background: var(--black);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 10px;
+      background: var(--green);
+    }
+
+    .brand {
+      position: fixed;
+      z-index: 20;
+      top: 28px;
+      right: 4vw;
+      color: var(--black);
+      font-size: 24px;
+      font-weight: 750;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .brand span { color: var(--green); }
+    body:has(.hero.active) .brand,
+    body:has(.dark.active) .brand { color: var(--white); }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 17px;
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 750;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 4px;
+      background: currentColor;
+    }
+
+    .hero .eyebrow, .dark .eyebrow { color: var(--green); }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1, h2 {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin-bottom: 24px;
+      font-size: 70px;
+      line-height: 1;
+    }
+
+    h2 {
+      max-width: 1040px;
+      margin-bottom: 26px;
+      font-size: 43px;
+      line-height: 1.08;
+    }
+
+    h3 {
+      margin-bottom: 9px;
+      font-size: 19px;
+      line-height: 1.22;
+    }
+
+    p, li {
+      font-size: 17px;
+      line-height: 1.45;
+    }
+
+    ul { margin: 0; padding-left: 1.15em; }
+    li { margin-bottom: 6px; }
+    li::marker { color: var(--green-dark); }
+    .dark li::marker { color: var(--green); }
+
+    .lead {
+      max-width: 830px;
+      color: var(--grey-700);
+      font-size: 23px;
+      line-height: 1.45;
+    }
+
+    .hero .lead, .dark .lead { color: rgba(255, 255, 255, 0.78); }
+
+    .note {
+      color: var(--grey-500);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .grid-2, .grid-3, .grid-4 {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .card--dark { color: var(--white); background: var(--charcoal); }
+    .card--green { color: var(--black); background: var(--green); }
+    .card--lesson { background: var(--amber-pale); }
+    .card--example { background: var(--green-pale); }
+    .card p:last-child, .card ul:last-child { margin-bottom: 0; }
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .method-grid .card { min-height: 170px; }
+
+    .label {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--green-dark);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .card--dark .label { color: var(--green); }
+
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 12px;
+    }
+
+    .tool {
+      padding: 5px 9px;
+      border: 1px solid var(--grey-200);
+      border-radius: 3px;
+      color: var(--black);
+      background: var(--white);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .source {
+      display: block;
+      margin-top: 11px;
+      color: var(--grey-700);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .source a { color: inherit; text-underline-offset: 2px; }
+    .source a:focus-visible { outline: 3px solid var(--green); }
+
+    .stack {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stack__column {
+      padding: 24px;
+      border-top: 7px solid var(--green);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .stack__column:nth-child(2) { border-top-color: var(--grey-700); }
+    .stack__column:nth-child(3) { color: var(--white); background: var(--charcoal); }
+
+    .number {
+      display: block;
+      margin-bottom: 13px;
+      color: var(--green-dark);
+      font-size: 38px;
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    .card--dark .number, .stack__column:nth-child(3) .number { color: var(--green); }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .flow__step {
+      position: relative;
+      min-height: 165px;
+      padding: 18px;
+      border-top: 6px solid var(--green);
+      color: var(--black);
+      background: var(--white);
+    }
+
+    .flow__step:not(:last-child)::after {
+      content: ">";
+      position: absolute;
+      top: 62px;
+      right: -10px;
+      z-index: 1;
+      color: var(--green-dark);
+      font-weight: 800;
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px 28px;
+    }
+
+    .principle {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+      font-size: 17px;
+      line-height: 1.4;
+    }
+
+    .principle::before {
+      content: "";
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      background: var(--green);
+    }
+
+    .controls {
+      position: fixed;
+      right: 24px;
+      bottom: 22px;
+      z-index: 30;
+      display: flex;
+      gap: 8px;
+    }
+
+    .control {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 50%;
+      color: var(--white);
+      background: rgba(11, 11, 11, 0.92);
+      cursor: pointer;
+      font-size: 22px;
+    }
+
+    .control:hover, .control:focus-visible {
+      color: var(--black);
+      background: var(--green);
+      outline: 3px solid rgba(134, 188, 37, 0.35);
+    }
+
+    .counter {
+      position: fixed;
+      left: 24px;
+      bottom: 27px;
+      z-index: 30;
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .progress {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 31;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .progress__bar {
+      width: 0;
+      height: 100%;
+      background: var(--green);
+      transition: width 200ms ease;
+    }
+
+    @media (max-width: 980px) {
+      .slide { align-content: start; padding: 58px 5vw 86px; }
+      h1 { font-size: 52px; }
+      h2 { font-size: 35px; }
+      .grid-4, .grid-3, .stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .flow { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .flow__step:not(:last-child)::after { display: none; }
+    }
+
+    @media (max-width: 650px) {
+      h1 { font-size: 42px; }
+      h2 { font-size: 30px; }
+      p, li { font-size: 16px; }
+      .lead { font-size: 20px; }
+      .grid-2, .grid-3, .grid-4, .stack, .method-grid, .principles, .flow { grid-template-columns: 1fr; }
+      .brand { top: 20px; right: 5vw; font-size: 20px; }
+      .controls { right: 14px; bottom: 16px; }
+      .counter { left: 14px; bottom: 23px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide, .progress__bar { transition: none; }
+    }
+
+    @media print {
+      body { overflow: visible; background: white; }
+      .deck { width: auto; height: auto; overflow: visible; }
+      .slide {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        break-after: page;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+      }
+      .controls, .counter, .progress { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-live="polite">
+    <section class="slide hero active" data-title="Opening">
+      <div class="slide__inner">
+        <p class="eyebrow">Technology testing and evaluation</p>
+        <h1>Testing AI-Enabled Technology</h1>
+        <p class="lead">A plain-English guide to checking that AI-produced code, content, models and decisions are secure, dependable and appropriate for their intended use.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Why layered testing">
+      <div class="slide__inner">
+        <p class="eyebrow">Why one test is not enough</p>
+        <h2>AI can introduce familiar technology risks and new model risks.</h2>
+        <div class="stack">
+          <article class="stack__column">
+            <span class="number">01</span>
+            <h3>Software and supply chain</h3>
+            <p>Check the code, packages and services used to build and run the solution.</p>
+            <p><strong>Methods:</strong> supply-chain review, SAST and DAST.</p>
+          </article>
+          <article class="stack__column">
+            <span class="number">02</span>
+            <h3>Model and outcomes</h3>
+            <p>Check how the model behaves, who may experience different outcomes and how it responds under pressure.</p>
+            <p><strong>Methods:</strong> adversarial, fairness and model-security testing.</p>
+          </article>
+          <article class="stack__column">
+            <span class="number">03</span>
+            <h3>Live operation</h3>
+            <p>Check that behavior remains acceptable after release and that people can understand important decisions.</p>
+            <p><strong>Methods:</strong> drift, monitoring and explainability testing.</p>
+          </article>
+        </div>
+        <p class="note" style="margin-top: 18px;">Tool names in this deck are illustrative examples, not endorsements. Use only tools approved by your organization.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Supply chain">
+      <div class="slide__inner">
+        <p class="eyebrow">Established approach 01</p>
+        <h2>Software supply-chain testing</h2>
+        <div class="method-grid">
+          <article class="card card--dark">
+            <span class="label">In plain English</span>
+            <p>Check every external package, model, container and build step that enters the solution. Ask: where did it come from, is it trusted, and is it known to be vulnerable?</p>
+            <div class="tools"><span class="tool">Snyk</span><span class="tool">Dependabot</span><span class="tool">Trivy</span><span class="tool">Syft / Grype</span><span class="tool">Sigstore</span></div>
+          </article>
+          <article class="card card--example">
+            <span class="label">Simple example</span>
+            <p>An AI assistant produces a Python service. Generate a software bill of materials, scan every dependency and container, verify signatures and block unapproved packages before release.</p>
+          </article>
+          <article class="card card--lesson">
+            <span class="label">Real-world lesson</span>
+            <p>The SolarWinds compromise showed that a trusted, signed software update can still carry malicious changes. Trust in the supplier name or signature alone is not enough.</p>
+            <span class="source">Source: <a href="https://www.gao.gov/products/gao-22-104746" target="_blank" rel="noreferrer">U.S. GAO review of the SolarWinds response</a></span>
+          </article>
+          <article class="card">
+            <span class="label">What good looks like</span>
+            <ul><li>Known inventory and ownership</li><li>Approved sources and locked versions</li><li>Signature, license and vulnerability checks</li><li>Fast response when a component changes</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="SAST">
+      <div class="slide__inner">
+        <p class="eyebrow">Established approach 02</p>
+        <h2>Static application security testing (SAST)</h2>
+        <div class="method-grid">
+          <article class="card card--dark">
+            <span class="label">In plain English</span>
+            <p>Inspect source code without running it. SAST looks for risky coding patterns such as injection, weak cryptography, exposed secrets and unsafe data handling.</p>
+            <div class="tools"><span class="tool">Semgrep</span><span class="tool">CodeQL</span><span class="tool">SonarQube</span><span class="tool">Checkmarx</span></div>
+          </article>
+          <article class="card card--example">
+            <span class="label">Simple example</span>
+            <p>An AI coding tool creates an API endpoint. SAST checks whether user input is joined directly into a database query or whether a secret was placed in the source.</p>
+          </article>
+          <article class="card card--lesson">
+            <span class="label">Real-world lesson</span>
+            <p>Apple's 2014 "goto fail" TLS flaw came from a duplicated control-flow statement that bypassed certificate validation. Source review and suitable static checks can target this class of defect, but no rule set finds everything.</p>
+            <span class="source">Source: <a href="https://nvd.nist.gov/vuln/detail/CVE-2014-1266" target="_blank" rel="noreferrer">NVD CVE-2014-1266</a></span>
+          </article>
+          <article class="card">
+            <span class="label">Important limit</span>
+            <p>SAST sees code, not the complete running system. It can also produce false positives. Review findings in context and combine it with runtime testing.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="DAST">
+      <div class="slide__inner">
+        <p class="eyebrow">Established approach 03</p>
+        <h2>Dynamic application security testing (DAST)</h2>
+        <div class="method-grid">
+          <article class="card card--dark">
+            <span class="label">In plain English</span>
+            <p>Test the running application from the outside. DAST sends requests and observes responses to find weaknesses that only appear when components work together.</p>
+            <div class="tools"><span class="tool">OWASP ZAP</span><span class="tool">Burp Suite</span><span class="tool">Invicti</span><span class="tool">StackHawk</span></div>
+          </article>
+          <article class="card card--example">
+            <span class="label">Simple example</span>
+            <p>Run the AI-generated web service in a test environment. Check authentication, session handling, input validation, error messages and common injection paths.</p>
+          </article>
+          <article class="card card--lesson">
+            <span class="label">Real-world lesson</span>
+            <p>The 2017 Equifax breach exposed personal information belonging to 147 million people. It reinforces why known web weaknesses must be found, fixed and retested. A scan without remediation evidence is not assurance.</p>
+            <span class="source">Source: <a href="https://www.ftc.gov/enforcement/refunds/equifax-data-breach-settlement" target="_blank" rel="noreferrer">U.S. FTC Equifax settlement summary</a></span>
+          </article>
+          <article class="card">
+            <span class="label">Important limit</span>
+            <p>DAST only sees reachable behavior in the tested environment. Coverage depends on authentication, test data and paths exercised. Pair it with SAST and human review.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Adversarial testing">
+      <div class="slide__inner">
+        <p class="eyebrow">AI-focused approach 01</p>
+        <h2>Adversarial testing</h2>
+        <div class="method-grid">
+          <article class="card card--dark">
+            <span class="label">In plain English</span>
+            <p>Deliberately challenge the AI with difficult, misleading or hostile inputs. The goal is to understand how safeguards behave before someone encounters the weakness in live use.</p>
+            <div class="tools"><span class="tool">garak</span><span class="tool">PyRIT</span><span class="tool">promptfoo</span><span class="tool">Giskard</span></div>
+          </article>
+          <article class="card card--example">
+            <span class="label">Simple example</span>
+            <p>Ask a sales chatbot to ignore its role, reveal its system prompt, create an unauthorized discount or follow the same request after it is encoded or introduced over several turns.</p>
+          </article>
+          <article class="card card--lesson">
+            <span class="label">Real-world lesson</span>
+            <p>In a widely reported 2023 incident, a dealership chatbot was prompted to agree to sell a car for $1. No sale occurred, but the exchange illustrated role and authority confusion.</p>
+            <span class="source">Source: <a href="proposals/proposal-01/CONTEXT.md" target="_blank">Proposal 01 incident anchor and safety context</a></span>
+          </article>
+          <article class="card">
+            <span class="label">What good looks like</span>
+            <p>Use an authorized, isolated environment. Test both attacks and legitimate requests, record expected behavior and avoid payloads that could cause harm outside the test.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Fairness testing">
+      <div class="slide__inner">
+        <p class="eyebrow">AI-focused approach 02</p>
+        <h2>Bias and fairness testing</h2>
+        <div class="method-grid">
+          <article class="card card--dark">
+            <span class="label">In plain English</span>
+            <p>Compare outcomes and error rates for relevant groups and contexts. Look for differences that are unexplained, harmful or inconsistent with the intended use and applicable law.</p>
+            <div class="tools"><span class="tool">Fairlearn</span><span class="tool">AI Fairness 360</span><span class="tool">Aequitas</span><span class="tool">Giskard</span></div>
+          </article>
+          <article class="card card--example">
+            <span class="label">Simple example</span>
+            <p>For an AI-supported screening service, compare false approvals, false declines and escalation rates across relevant populations. Involve legal, privacy and subject-matter specialists before selecting attributes or thresholds.</p>
+          </article>
+          <article class="card card--lesson">
+            <span class="label">Real-world lesson</span>
+            <p>NIST evaluated 189 face-recognition algorithms and found demographic differentials in the majority. Results varied by algorithm and task; some one-to-one false-positive differences were 10 to 100 times.</p>
+            <span class="source">Source: <a href="https://www.nist.gov/news-events/news/2019/12/nist-study-evaluates-effects-race-age-sex-face-recognition-software" target="_blank" rel="noreferrer">NIST demographic effects study</a></span>
+          </article>
+          <article class="card">
+            <span class="label">Use respectful evidence</span>
+            <p>Metrics do not define people. Protect personal information, use lawful categories, include affected perspectives and consider both overall accuracy and the consequences of each error type.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Drift detection">
+      <div class="slide__inner">
+        <p class="eyebrow">AI-focused approach 03</p>
+        <h2>Drift detection</h2>
+        <div class="method-grid">
+          <article class="card card--dark">
+            <span class="label">In plain English</span>
+            <p>Watch for changes in inputs, outputs or real-world relationships after release. A model can stay technically unchanged while the environment around it moves.</p>
+            <div class="tools"><span class="tool">Evidently</span><span class="tool">NannyML</span><span class="tool">WhyLabs</span><span class="tool">Arize</span><span class="tool">Fiddler</span></div>
+          </article>
+          <article class="card card--example">
+            <span class="label">Simple example</span>
+            <p>A fraud model was trained before a new payment method launched. Monitor feature distributions, decision rates and confirmed fraud so the team can investigate meaningful change.</p>
+          </article>
+          <article class="card card--lesson">
+            <span class="label">Real-world lesson</span>
+            <p>Google Flu Trends substantially overestimated flu prevalence for extended periods as search behavior and the service changed. The lesson is to compare model signals with reliable external outcomes.</p>
+            <span class="source">Source: <a href="https://doi.org/10.1126/science.1248506" target="_blank" rel="noreferrer">Lazer et al., Science, 2014</a></span>
+          </article>
+          <article class="card">
+            <span class="label">Important limit</span>
+            <p>A statistical alert says something changed; it does not explain why or whether the change is harmful. Use thresholds, context, outcome data and accountable human review.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Model security">
+      <div class="slide__inner">
+        <p class="eyebrow">AI-focused approach 04</p>
+        <h2>Model security testing</h2>
+        <div class="method-grid">
+          <article class="card card--dark">
+            <span class="label">In plain English</span>
+            <p>Treat models and AI runtimes as software assets. Check model files, loading behavior, access controls, interfaces and resistance to extraction, tampering or unsafe deserialization.</p>
+            <div class="tools"><span class="tool">ModelScan</span><span class="tool">Fickling</span><span class="tool">garak</span><span class="tool">Trivy</span></div>
+          </article>
+          <article class="card card--example">
+            <span class="label">Simple example</span>
+            <p>Before loading a downloaded model, verify its source and digest, scan serialized files, run it without unnecessary privileges and test whether its endpoint leaks training or system information.</p>
+          </article>
+          <article class="card card--lesson">
+            <span class="label">Real-world lesson</span>
+            <p>In December 2022, some Linux installations of PyTorch nightly received a malicious dependency from PyPI. Stable packages were not affected. The case shows that the AI runtime and package path are part of model security.</p>
+            <span class="source">Source: <a href="https://pytorch.org/blog/compromised-nightly-dependency/" target="_blank" rel="noreferrer">PyTorch incident notice</a></span>
+          </article>
+          <article class="card">
+            <span class="label">What good looks like</span>
+            <ul><li>Trusted source and immutable digest</li><li>Safe serialization format</li><li>Least-privilege runtime</li><li>Restricted model and endpoint access</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Real-time monitoring">
+      <div class="slide__inner">
+        <p class="eyebrow">AI-focused approach 05</p>
+        <h2>Real-time monitoring</h2>
+        <div class="method-grid">
+          <article class="card card--dark">
+            <span class="label">In plain English</span>
+            <p>Observe the live system for unsafe outputs, unusual usage, control failures, poor performance and operational problems. Connect alerts to people who can investigate and act.</p>
+            <div class="tools"><span class="tool">OpenTelemetry</span><span class="tool">Splunk</span><span class="tool">Datadog</span><span class="tool">Arize</span><span class="tool">WhyLabs</span></div>
+          </article>
+          <article class="card card--example">
+            <span class="label">Simple example</span>
+            <p>Monitor a chatbot's refusal, escalation, error and harmful-output rates. Alert on a sudden change, retain privacy-appropriate evidence and provide a tested pause or rollback route.</p>
+          </article>
+          <article class="card card--lesson">
+            <span class="label">Real-world lesson</span>
+            <p>Microsoft took Tay offline after a coordinated attack exploited a missed vulnerability within its first 24 hours. Microsoft noted that it had filtering and stress tests, but had not anticipated that specific attack.</p>
+            <span class="source">Source: <a href="https://blogs.microsoft.com/blog/2016/03/25/learning-tays-introduction/" target="_blank" rel="noreferrer">Microsoft: Learning from Tay's introduction</a></span>
+          </article>
+          <article class="card">
+            <span class="label">Important limit</span>
+            <p>Collecting logs is not the same as monitoring. Define owners, thresholds, response times, privacy controls and rehearsed actions before launch.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Explainability">
+      <div class="slide__inner">
+        <p class="eyebrow">AI-focused approach 06</p>
+        <h2>Explainability and interpretability testing</h2>
+        <div class="method-grid">
+          <article class="card card--dark">
+            <span class="label">In plain English</span>
+            <p>Check whether the people using, reviewing or affected by a system can understand the important reasons behind an output well enough to question it and act responsibly.</p>
+            <div class="tools"><span class="tool">SHAP</span><span class="tool">LIME</span><span class="tool">Captum</span><span class="tool">InterpretML</span></div>
+          </article>
+          <article class="card card--example">
+            <span class="label">Simple example</span>
+            <p>For a lending recommendation, test whether the explanation identifies meaningful factors, stays consistent for similar cases and changes sensibly when an input changes.</p>
+          </article>
+          <article class="card card--lesson">
+            <span class="label">Real-world lesson</span>
+            <p>The COMPAS risk-score debate showed the difficulty of challenging high-impact decisions when calculations are proprietary. ProPublica reported different error patterns by race; the vendor disputed its methodology.</p>
+            <span class="source">Source: <a href="https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing" target="_blank" rel="noreferrer">ProPublica analysis and vendor response</a></span>
+          </article>
+          <article class="card">
+            <span class="label">Important limit</span>
+            <p>A plausible explanation may still be incomplete or misleading. Test explanations with technical reviewers, domain specialists and intended users; do not treat a chart as proof of fairness.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide dark" data-title="Integrated lifecycle">
+      <div class="slide__inner">
+        <p class="eyebrow">Put the methods together</p>
+        <h2>No single test provides assurance.</h2>
+        <div class="flow">
+          <article class="flow__step"><span class="number">1</span><h3>Define</h3><p>Purpose, users, harms, boundaries and acceptance criteria.</p></article>
+          <article class="flow__step"><span class="number">2</span><h3>Inventory</h3><p>Code, data, models, packages, interfaces and owners.</p></article>
+          <article class="flow__step"><span class="number">3</span><h3>Test</h3><p>Static, dynamic, adversarial, fairness and security checks.</p></article>
+          <article class="flow__step"><span class="number">4</span><h3>Decide</h3><p>Review evidence, exceptions, residual risk and approval.</p></article>
+          <article class="flow__step"><span class="number">5</span><h3>Monitor</h3><p>Performance, drift, misuse, fairness and incidents.</p></article>
+          <article class="flow__step"><span class="number">6</span><h3>Improve</h3><p>Retest changes and feed lessons into the next release.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Corporate testing standard">
+      <div class="slide__inner">
+        <p class="eyebrow">A practical corporate standard</p>
+        <h2>Evidence should be proportionate, repeatable and owned.</h2>
+        <div class="principles">
+          <div class="principle"><span><strong>Risk-based:</strong> apply deeper testing where decisions or failures can affect people, money, safety, rights or critical operations.</span></div>
+          <div class="principle"><span><strong>Inclusive:</strong> involve relevant disciplines and people with different perspectives; use respectful, precise language.</span></div>
+          <div class="principle"><span><strong>Authorized:</strong> test only approved systems, data and environments with clear boundaries.</span></div>
+          <div class="principle"><span><strong>Repeatable:</strong> keep versions, prompts, test data, expected results and evidence.</span></div>
+          <div class="principle"><span><strong>Independent where needed:</strong> high-impact systems benefit from review beyond the delivery team.</span></div>
+          <div class="principle"><span><strong>Actionable:</strong> findings need an owner, priority, decision and retest date.</span></div>
+          <div class="principle"><span><strong>Privacy-aware:</strong> minimize personal information and protect logs, prompts and test datasets.</span></div>
+          <div class="principle"><span><strong>Continuous:</strong> release approval is a checkpoint, not the end of testing.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="References">
+      <div class="slide__inner">
+        <p class="eyebrow">Further reading</p>
+        <h2>Standards and source material</h2>
+        <div class="grid-2">
+          <article class="card">
+            <h3>Testing frameworks</h3>
+            <ul>
+              <li><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank" rel="noreferrer">NIST AI Risk Management Framework</a></li>
+              <li><a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" target="_blank" rel="noreferrer">OWASP Top 10 for LLM Applications</a></li>
+              <li><a href="https://atlas.mitre.org/" target="_blank" rel="noreferrer">MITRE ATLAS</a></li>
+              <li><a href="https://owasp.org/www-project-web-security-testing-guide/" target="_blank" rel="noreferrer">OWASP Web Security Testing Guide</a></li>
+            </ul>
+          </article>
+          <article class="card card--example">
+            <h3>How to use this deck</h3>
+            <ul>
+              <li>Treat the methods as complementary controls.</li>
+              <li>Select tools through your organization's approval process.</li>
+              <li>Validate legal, privacy and accessibility obligations for the use case.</li>
+              <li>Keep human accountability for high-impact decisions.</li>
+            </ul>
+          </article>
+        </div>
+        <p class="note" style="margin-top: 18px;">Real-world examples are simplified for learning. They illustrate control lessons and do not imply that one test alone would have prevented an incident.</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="brand" aria-label="Deloitte">Deloitte<span>.</span></div>
+  <div class="counter" aria-label="Slide number"><span id="current">01</span> / <span id="total">14</span></div>
+  <nav class="controls" aria-label="Presentation controls">
+    <button class="control" id="previous" type="button" aria-label="Previous slide" title="Previous slide">&#8249;</button>
+    <button class="control" id="next" type="button" aria-label="Next slide" title="Next slide">&#8250;</button>
+    <button class="control" id="fullscreen" type="button" aria-label="Toggle fullscreen" title="Toggle fullscreen">&#9974;</button>
+  </nav>
+  <div class="progress" aria-hidden="true"><div class="progress__bar" id="progress"></div></div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const currentLabel = document.getElementById('current');
+    const totalLabel = document.getElementById('total');
+    const progress = document.getElementById('progress');
+    let index = 0;
+
+    totalLabel.textContent = String(slides.length).padStart(2, '0');
+
+    function showSlide(nextIndex, updateHash = true) {
+      const boundedIndex = Math.max(0, Math.min(nextIndex, slides.length - 1));
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle('active', slideIndex === boundedIndex);
+        slide.classList.toggle('previous', slideIndex < boundedIndex);
+        slide.setAttribute('aria-hidden', slideIndex === boundedIndex ? 'false' : 'true');
+      });
+      index = boundedIndex;
+      currentLabel.textContent = String(index + 1).padStart(2, '0');
+      progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+      document.title = `${slides[index].dataset.title} | AI Testing and Evaluation`;
+      if (updateHash) history.replaceState(null, '', `#${index + 1}`);
+    }
+
+    function initialSlide() {
+      const hashIndex = Number.parseInt(location.hash.slice(1), 10) - 1;
+      return Number.isNaN(hashIndex) ? 0 : hashIndex;
+    }
+
+    document.getElementById('previous').addEventListener('click', () => showSlide(index - 1));
+    document.getElementById('next').addEventListener('click', () => showSlide(index + 1));
+    document.getElementById('fullscreen').addEventListener('click', () => {
+      if (document.fullscreenElement) document.exitFullscreen();
+      else document.documentElement.requestFullscreen();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(event.key)) {
+        event.preventDefault();
+        showSlide(index + 1);
+      } else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(event.key)) {
+        event.preventDefault();
+        showSlide(index - 1);
+      } else if (event.key === 'Home') {
+        showSlide(0);
+      } else if (event.key === 'End') {
+        showSlide(slides.length - 1);
+      } else if (event.key.toLowerCase() === 'f') {
+        document.getElementById('fullscreen').click();
+      }
+    });
+
+    window.addEventListener('hashchange', () => showSlide(initialSlide(), false));
+    showSlide(initialSlide(), false);
+  </script>
+</body>
+</html>

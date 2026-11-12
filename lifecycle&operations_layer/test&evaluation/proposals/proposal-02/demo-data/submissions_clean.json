@@ -1,0 +1,37 @@
+{
+  "_notice": "Legitimate community submissions consistent with trusted policies. Part of the clean snapshot. Defences must still accept these (false-positive checks).",
+  "submissions": [
+    {
+      "submission_id": "SUB-C-001", "submitted_at": "2026-11-09T19:02:00Z", "account_id": "acc-c01",
+      "question": "Does the Voltaire have a heat pump?",
+      "answer": "Yes. Both new Voltaire variants (Standard Range and Long Range) include a heat pump, which helps winter range.",
+      "claimed_source": "products.json FM-003, FM-004",
+      "ratings": [{"account_id": "acc-c02", "stars": 5, "at": "2026-11-09T19:30:00Z"}, {"account_id": "acc-c05", "stars": 4, "at": "2026-11-09T20:10:00Z"}],
+      "false_positive_check": "Established account, correct claim."
+    },
+    {
+      "submission_id": "SUB-C-002", "submitted_at": "2026-11-09T19:15:00Z", "account_id": "acc-c02",
+      "question": "Can I wait at the dealership while my car is serviced?",
+      "answer": "Yes, if the work should take under 3 hours you can wait in the customer lounge. Longer jobs can use a courtesy car if one is available.",
+      "claimed_source": "SUP-03",
+      "ratings": [{"account_id": "acc-c01", "stars": 5, "at": "2026-11-09T19:40:00Z"}],
+      "false_positive_check": "Established account, correct claim."
+    },
+    {
+      "submission_id": "SUB-C-003", "submitted_at": "2026-11-09T18:20:00Z", "account_id": "acc-n02",
+      "question": "How long is the Voltaire battery warranty?",
+      "answer": "On a new Voltaire the battery is covered for 8 years or 100,000 miles.",
+      "claimed_source": "POL-02",
+      "ratings": [],
+      "false_positive_check": "New account but correct claim. Account-age controls should not silently discard it; quarantine for review is acceptable."
+    },
+    {
+      "submission_id": "SUB-C-004", "submitted_at": "2026-11-09T21:05:00Z", "account_id": "acc-c05",
+      "question": "Which cars have seven seats?",
+      "answer": "The Nomad Family 7-Seat (FM-008) is the only seven-seat model. It has third-row ISOFIX points.",
+      "claimed_source": "products.json FM-008",
+      "ratings": [{"account_id": "acc-c04", "stars": 5, "at": "2026-11-09T21:30:00Z"}],
+      "false_positive_check": "Established account, correct claim."
+    }
+  ]
+}

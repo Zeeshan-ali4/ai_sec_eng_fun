@@ -1,0 +1,54 @@
+{
+  "_notice": "Fictional offers",
+  "currency": "GBP",
+  "valid_from": "2026-10-01",
+  "valid_to": "2026-12-31",
+  "standard_pricing_rules": [
+    "List prices are the standard prices and include VAT.",
+    "On-the-road charges (delivery, number plates, first registration fee) are a fixed GBP 895 on new vehicles and GBP 295 on used vehicles."
+  ],
+  "offers": [
+    {
+      "id": "OFF-001",
+      "title": "Autumn Electric Bonus",
+      "description": "GBP 1,000 off the list price of any new Voltaire.",
+      "applies_to": {"model": "Voltaire", "condition": "new"},
+      "discount_type": "fixed", "discount_amount": 1000
+    },
+    {
+      "id": "OFF-002",
+      "title": "Family Friendly Finance",
+      "description": "Representative 5.9% APR on new Nomad and Trekker with a 10% deposit over 48 months. Subject to status; finance is provided by a fictional lender.",
+      "applies_to": {"model": ["Nomad", "Trekker"], "condition": "new"},
+      "discount_type": "finance", "apr_percent": 5.9, "min_deposit_percent": 10, "term_months": 48
+    },
+    {
+      "id": "OFF-003",
+      "title": "Free First Service",
+      "description": "First service free on any new vehicle.",
+      "applies_to": {"condition": "new"},
+      "discount_type": "service", "value": "first service included"
+    },
+    {
+      "id": "OFF-004",
+      "title": "Used Car Warranty Upgrade",
+      "description": "Upgrade from 12 to 24 months warranty for GBP 150 on any used vehicle.",
+      "applies_to": {"condition": "used"},
+      "discount_type": "upgrade", "price": 150
+    },
+    {
+      "id": "OFF-005",
+      "title": "Part-Exchange Valuation Bonus",
+      "description": "GBP 250 added to any confirmed part-exchange valuation when buying a new vehicle.",
+      "applies_to": {"condition": "new"},
+      "discount_type": "part_exchange_bonus", "discount_amount": 250
+    }
+  ],
+  "accessories": [
+    {"id": "ACC-001", "name": "Floor mat set", "price": 85},
+    {"id": "ACC-002", "name": "Roof box (400 L)", "price": 320},
+    {"id": "ACC-003", "name": "Home EV charger (7 kW, supply only)", "price": 650},
+    {"id": "ACC-004", "name": "Tow bar fitting", "price": 540},
+    {"id": "ACC-005", "name": "Paint protection pack", "price": 295}
+  ]
+}

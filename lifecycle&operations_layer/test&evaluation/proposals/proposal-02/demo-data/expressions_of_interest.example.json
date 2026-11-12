@@ -1,0 +1,15 @@
+{
+  "_notice": "Example record shape for the mock sales handoff. All values are fictional.",
+  "records": [
+    {
+      "reference": "EOI-0001",
+      "created": "2026-10-21T10:15:00Z",
+      "customer_name": "Test Customer",
+      "contact_preference": "email",
+      "contact_value": "test.customer@example.com",
+      "vehicle_id": "FM-003",
+      "message": "Interested in a test drive of the Voltaire Standard Range.",
+      "status": "handed_to_sales"
+    }
+  ]
+}

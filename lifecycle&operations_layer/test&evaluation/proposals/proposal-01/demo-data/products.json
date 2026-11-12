@@ -1,0 +1,94 @@
+{
+  "_notice": "Fictional vehicles and prices. Not real listings.",
+  "currency": "GBP",
+  "products": [
+    {
+      "id": "FM-001", "make": "Fakeford", "model": "Sprout", "variant": "Active", "year": 2026,
+      "condition": "new", "body": "hatchback", "fuel": "petrol", "transmission": "manual",
+      "mileage": 0, "colour": "Meadow Green", "seats": 5, "mpg": 52.3,
+      "list_price": 16995, "stock": 4,
+      "features": ["Bluetooth", "Rear parking sensors", "7-inch touchscreen"]
+    },
+    {
+      "id": "FM-002", "make": "Fakeford", "model": "Sprout", "variant": "Comfort", "year": 2026,
+      "condition": "new", "body": "hatchback", "fuel": "petrol", "transmission": "automatic",
+      "mileage": 0, "colour": "Polar White", "seats": 5, "mpg": 49.6,
+      "list_price": 18995, "stock": 3,
+      "features": ["Apple CarPlay", "Android Auto", "Heated seats", "Reversing camera"]
+    },
+    {
+      "id": "FM-003", "make": "Fakeford", "model": "Voltaire", "variant": "Standard Range", "year": 2026,
+      "condition": "new", "body": "hatchback", "fuel": "electric", "transmission": "automatic",
+      "mileage": 0, "colour": "Midnight Blue", "seats": 5, "range_miles": 215,
+      "list_price": 27495, "stock": 2,
+      "features": ["Heat pump", "Adaptive cruise control", "10-inch touchscreen"]
+    },
+    {
+      "id": "FM-004", "make": "Fakeford", "model": "Voltaire", "variant": "Long Range", "year": 2026,
+      "condition": "new", "body": "hatchback", "fuel": "electric", "transmission": "automatic",
+      "mileage": 0, "colour": "Solar Silver", "seats": 5, "range_miles": 305,
+      "list_price": 31995, "stock": 2,
+      "features": ["Heat pump", "Adaptive cruise control", "Panoramic roof", "Wireless charging pad"]
+    },
+    {
+      "id": "FM-005", "make": "Fakeford", "model": "Trekker", "variant": "SE", "year": 2026,
+      "condition": "new", "body": "SUV", "fuel": "hybrid", "transmission": "automatic",
+      "mileage": 0, "colour": "Granite Grey", "seats": 5, "mpg": 54.1,
+      "list_price": 29450, "stock": 3,
+      "features": ["Roof rails", "Lane assist", "Keyless entry", "Power tailgate"]
+    },
+    {
+      "id": "FM-006", "make": "Fakeford", "model": "Trekker", "variant": "Adventure AWD", "year": 2026,
+      "condition": "new", "body": "SUV", "fuel": "diesel", "transmission": "automatic",
+      "mileage": 0, "colour": "Canyon Orange", "seats": 5, "mpg": 44.8,
+      "list_price": 34250, "stock": 1,
+      "features": ["All-wheel drive", "Tow bar", "Leather seats", "360-degree camera"]
+    },
+    {
+      "id": "FM-007", "make": "Fakeford", "model": "Hauler", "variant": "Crew Cab", "year": 2026,
+      "condition": "new", "body": "pickup", "fuel": "diesel", "transmission": "manual",
+      "mileage": 0, "colour": "Work Yellow", "seats": 5, "mpg": 33.2,
+      "list_price": 36800, "stock": 2,
+      "features": ["Load liner", "Towing capacity 3,000 kg", "Rear diff lock"]
+    },
+    {
+      "id": "FM-008", "make": "Fakeford", "model": "Nomad", "variant": "Family 7-Seat", "year": 2026,
+      "condition": "new", "body": "MPV", "fuel": "hybrid", "transmission": "automatic",
+      "mileage": 0, "colour": "Sandstone Beige", "seats": 7, "mpg": 47.9,
+      "list_price": 33995, "stock": 2,
+      "features": ["Sliding rear doors", "Third-row ISOFIX", "Tri-zone climate control"]
+    },
+    {
+      "id": "FM-101", "make": "Fakeford", "model": "Sprout", "variant": "Active", "year": 2022,
+      "condition": "used", "body": "hatchback", "fuel": "petrol", "transmission": "manual",
+      "mileage": 28400, "colour": "Cherry Red", "seats": 5, "mpg": 51.0,
+      "list_price": 11250, "stock": 1,
+      "features": ["Bluetooth", "Rear parking sensors"],
+      "used_check": "Two previous owners, full service history, 12-month warranty included"
+    },
+    {
+      "id": "FM-102", "make": "Fakeford", "model": "Trekker", "variant": "SE", "year": 2021,
+      "condition": "used", "body": "SUV", "fuel": "petrol", "transmission": "automatic",
+      "mileage": 41200, "colour": "Slate Black", "seats": 5, "mpg": 41.5,
+      "list_price": 17900, "stock": 1,
+      "features": ["Roof rails", "Lane assist", "Heated seats"],
+      "used_check": "One previous owner, full service history, 12-month warranty included"
+    },
+    {
+      "id": "FM-103", "make": "Fakeford", "model": "Voltaire", "variant": "Standard Range", "year": 2023,
+      "condition": "used", "body": "hatchback", "fuel": "electric", "transmission": "automatic",
+      "mileage": 15600, "colour": "Solar Silver", "seats": 5, "range_miles": 200,
+      "list_price": 19995, "stock": 1,
+      "features": ["Heat pump", "Adaptive cruise control"],
+      "used_check": "One previous owner, battery health certificate 96%, 12-month warranty included"
+    },
+    {
+      "id": "FM-104", "make": "Fakeford", "model": "Hauler", "variant": "Crew Cab", "year": 2020,
+      "condition": "used", "body": "pickup", "fuel": "diesel", "transmission": "manual",
+      "mileage": 67800, "colour": "Steel Grey", "seats": 5, "mpg": 31.4,
+      "list_price": 19450, "stock": 1,
+      "features": ["Load liner", "Tow bar"],
+      "used_check": "Two previous owners, full service history, 12-month warranty included"
+    }
+  ]
+}

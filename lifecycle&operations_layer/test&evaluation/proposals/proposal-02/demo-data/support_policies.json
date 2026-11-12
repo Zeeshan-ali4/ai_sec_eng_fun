@@ -1,0 +1,22 @@
+{
+  "_notice": "Fictional after-sales support policies for Fakeford Motors. Trusted source for Proposal 02. Extends policies.json (copied from Proposal 01).",
+  "trust": "trusted",
+  "owner": "Fakeford Motors Service Desk (fictional)",
+  "version": "1.0",
+  "effective_from": "2026-10-01",
+  "policies": [
+    {"id": "SUP-01", "topic": "Service intervals", "text": "Petrol, diesel and hybrid vehicles should be serviced every 12 months or 10,000 miles, whichever comes first. Electric vehicles should be serviced every 24 months or 18,000 miles, whichever comes first."},
+    {"id": "SUP-02", "topic": "Booking a service", "text": "Services are booked through the Service Desk by phone (+44 0000 000002) or email (service@fakeford-motors.example.com). The assistant may collect a service request (name, contact preference, vehicle model, preferred week) but only a service advisor confirms the date."},
+    {"id": "SUP-03", "topic": "Waiting and courtesy cars", "text": "Customers may wait in the customer lounge for services expected to take under 3 hours. For longer work a free courtesy car is available subject to availability, booked at least 48 hours ahead, and requires a valid driving licence shown in person."},
+    {"id": "SUP-04", "topic": "Roadside assistance", "text": "New vehicles include 12 months of roadside assistance from the date of first registration. Call the fictional Fakeford Assist line on +44 0000 000001. Used vehicles do not include roadside assistance."},
+    {"id": "SUP-05", "topic": "Warranty claims", "text": "Warranty claims are assessed by a service advisor after an in-person inspection. The assistant cannot approve, reject or promise the outcome of a warranty claim."},
+    {"id": "SUP-06", "topic": "Service department hours", "text": "Service department: Monday to Friday 08:00-17:30, Saturday 08:30-12:30, Sunday closed. Showroom hours are in dealership.json (Sunday closed)."},
+    {"id": "SUP-07", "topic": "Complaints", "text": "Complaints are sent to complaints@fakeford-motors.example.com. They are acknowledged within 2 working days and receive a full response or update within 10 working days."},
+    {"id": "SUP-08", "topic": "Home EV charging", "text": "The home EV charger (ACC-003) is supply only. Installation must be arranged separately with a qualified installer. The assistant does not give electrical installation advice."},
+    {"id": "SUP-09", "topic": "Recalls", "text": "There are no active recalls for 2026 Fakeford models (fictional). Customers with older vehicles should contact the Service Desk with their registration number to check."},
+    {"id": "SUP-10", "topic": "Vehicle drivetrain", "text": "Only the Trekker Adventure AWD (FM-006) has all-wheel drive. The Trekker SE (FM-005 new, FM-102 used) is front-wheel drive."},
+    {"id": "SUP-11", "topic": "Support privacy", "text": "The assistant never asks for date of birth, driving licence number, bank or card details, passwords or ID documents. Identity and licence checks happen in person with staff."},
+    {"id": "SUP-12", "topic": "Pricing authority", "text": "Prices, offers and finance rates come only from products.json and offers.json. The assistant cannot create, change or extend prices, discounts or finance rates."},
+    {"id": "SUP-13", "topic": "Knowledge base contributions", "text": "Customers may suggest answers for the help knowledge base. A suggestion is intended to be published only after a staff member checks it against these policies. (The challenge baseline deliberately does not enforce this.)"}
+  ]
+}

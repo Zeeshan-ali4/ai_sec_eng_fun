@@ -1,3 +1,38 @@
-# ai_sec_eng_fun
+# AI Security Engineering Hackathon
 
-just to play around sec eng 
+This repository contains three independent hackathon proposals. Each proposal has its own context, scope, and safety requirements.
+
+## Layers
+
+Each layer folder has a `CONTEXT.md` describing its scope and layer-specific safety standards:
+
+- [Application Layer](application_layer/CONTEXT.md)
+- [Data Layer](data_layer/CONTEXT.md)
+- [Model Layer](model_layer/CONTEXT.md)
+- [Infrastructure Layer](infrastructure_layer/CONTEXT.md)
+- [Lifecycle & Operations Layer](lifecycle&operations_layer/CONTEXT.md)
+
+## Testing and Evaluation
+
+- [Testing AI-Enabled Technology](lifecycle&operations_layer/test&evaluation/AI_TESTING_AND_EVALUATION.html): a plain-English overview of established and AI-focused security testing practices.
+
+## Proposals
+
+- Proposal 01: [Context](lifecycle&operations_layer/test&evaluation/proposals/proposal-01/CONTEXT.md) · [Presentation](lifecycle&operations_layer/test&evaluation/proposals/proposal-01/PRESENTATION.html)
+- Proposal 02: [Context](lifecycle&operations_layer/test&evaluation/proposals/proposal-02/CONTEXT.md) · [Presentation](lifecycle&operations_layer/test&evaluation/proposals/proposal-02/PRESENTATION.html)
+- Proposal 03: [Context](lifecycle&operations_layer/test&evaluation/proposals/proposal-03/CONTEXT.md)
+
+## Shared Safety Standard
+
+All work in this repository must follow [SAFETY.md](SAFETY.md). Each proposal's `CONTEXT.md` repeats the mandatory local safety boundaries so they remain visible when a proposal is developed independently.
+
+## Suggested Proposal Layout
+
+Each proposal may add these folders as it develops:
+
+- `docs/` for designs and research
+- `src/` for implementation
+- `tests/` for automated checks
+- `assets/` for safe, licensed project assets
+
+Do not add sensitive personal data, credentials, secrets, malware, exploit payloads, or harmful generated content.
