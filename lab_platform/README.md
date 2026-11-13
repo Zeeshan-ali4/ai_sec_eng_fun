@@ -1,5 +1,7 @@
 # Fakeford Motors — Milestone 3
 
+[Host & Organiser Runbook](../lifecycle&operations_layer/test&evaluation/proposals/proposal-01/HOST_FACILITATOR_RUNBOOK.md) is the primary practical guide for installing, facilitating, troubleshooting and resetting Proposal 01.
+
 An isolated Flask + SQLite + vanilla JavaScript lab using local Ollama `llama3.1:8b`. Five exercises compare deliberately inadequate application controls with deterministic server boundaries. Follow the root `SAFETY.md`. Use fictional aliases and harmless training text only. Deliberately vulnerable controls must never be deployed as production security controls.
 
 ## Startup

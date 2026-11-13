@@ -49,4 +49,6 @@ Do not add sensitive personal data, credentials, secrets, malware, exploit paylo
 
 ## Runnable Local Lab
 
+[Proposal 01 Host & Organiser Runbook](lifecycle&operations_layer/test&evaluation/proposals/proposal-01/HOST_FACILITATOR_RUNBOOK.md): primary guide for installation, facilitation, evidence, reset and recovery.
+
 [Fakeford Motors security lab — Milestone 3](lab_platform/README.md): local Flask/Ollama lab with five challenges, vulnerable and hardened modes, isolated synthetic data, evidence and automated evaluation.
