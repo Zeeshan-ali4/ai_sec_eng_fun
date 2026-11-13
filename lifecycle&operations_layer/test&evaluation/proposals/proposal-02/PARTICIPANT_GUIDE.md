@@ -1,5 +1,7 @@
 # Proposal 02 Participant Guide
 
+For current installation, browser investigations and optional student APIs, use the [Host & Organiser Runbook](HOST_FACILITATOR_RUNBOOK.md). Its implementation notes supersede the earlier setup and event-planning sketches below.
+
 This guide defines the setup, workflow, rules, and submission expectations for the adaptive-AI poisoning challenge. Exact commands will be added after the baseline package is implemented and tested.
 
 ## Intended Participants
