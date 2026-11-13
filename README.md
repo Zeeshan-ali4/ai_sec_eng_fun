@@ -58,3 +58,5 @@ Do not add sensitive personal data, credentials, secrets, malware, exploit paylo
 [Lumen Home implementation and commands](lab_platform/proposal2/IMPLEMENTATION.md): independent support assistant at `http://127.0.0.1:5000/proposal-02`, 24 approved SQLite-backed articles, pending proposals, local organiser review/publication, provenance, an 18-case clean benchmark and isolated reset. Start with `python -m lab_platform.app` after the shared installation. This milestone does not enable poisoning or the weak ingestion described in earlier builder sketches. Proposal 1 remains available at `/`, with its existing host runbook unchanged.
 
 [Proposal 02 — Milestone 5 controlled poisoning exercises](lab_platform/proposal2/MILESTONE5.md): seven isolated scenarios, weak ingestion, retrieval evidence and clean comparisons.
+
+[Proposal 02 — Milestone 6 defensive controls and recovery](lab_platform/proposal2/MILESTONE6.md): independent hardened ingestion, quarantine, trusted local review/publication, exact-payload comparisons and versioned recovery.

@@ -21,12 +21,38 @@ def main(argv=None):
     p = sub.add_parser('publish')
     p.add_argument('id', type=int)
     sub.add_parser('reset').add_argument('--confirm', action='store_true')
+    for name in ('sandbox-list', 'sandbox-review', 'sandbox-publish', 'sandbox-rollback', 'sandbox-quarantine'):
+        command = sub.add_parser(name, help='Trusted local hardened sandbox operation; no Flask restart needed.')
+        command.add_argument('--session', required=True, help='Hashed session ID shown in sandbox evidence')
+        command.add_argument('--scenario', required=True, choices=[f'DP-{n:03}' for n in range(1, 8)])
+        if name in {'sandbox-review', 'sandbox-publish', 'sandbox-quarantine'}:
+            command.add_argument('--submission', required=True)
+        if name == 'sandbox-review':
+            command.add_argument('--decision', choices=['approved', 'rejected'], required=True)
+            command.add_argument('--note', required=True, help='Factual review evidence, 1–1000 characters')
+        if name == 'sandbox-rollback':
+            command.add_argument('--version', required=True, type=int)
     args = parser.parse_args(argv)
     if args.command == 'reset' and not args.confirm:
         parser.error('Stop Flask first; reset requires --confirm. Evidence is retained.')
     kb = KnowledgeBase(DEFAULT_PATH)
     try:
-        if args.command == 'status':
+        if args.command.startswith('sandbox-'):
+            from .defensive_service import DefensiveService
+            config = settings()
+            sandbox = DefensiveService(kb, OllamaClient(config), config)
+            scope = (args.session, args.scenario)
+            if args.command == 'sandbox-list':
+                result = dict(state=sandbox.state(*scope), evidence=sandbox.export(*scope))
+            elif args.command == 'sandbox-review':
+                result = sandbox.review(*scope, args.submission, args.decision, args.note)
+            elif args.command == 'sandbox-publish':
+                result = sandbox.publish(*scope, args.submission)
+            elif args.command == 'sandbox-quarantine':
+                result = sandbox.quarantine(*scope, args.submission)
+            else:
+                result = sandbox.rollback(*scope, args.version)
+        elif args.command == 'status':
             result = kb.info()
         elif args.command == 'review':
             review(kb, args.id, args.decision)

@@ -64,3 +64,5 @@ Teams submit:
 4. Post-control results using the same tests.
 5. Evidence from provenance, acceptance, retrieval, and rollback logs.
 6. A concise explanation of design choices, remaining limitations, and recovery steps.
+
+Current technical implementation and all seven defensive demonstrations: [Milestone 6](../../../../lab_platform/proposal2/MILESTONE6.md).

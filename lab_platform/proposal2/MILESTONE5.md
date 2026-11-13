@@ -1,5 +1,8 @@
 # Milestone 5: controlled data poisoning
 
+This historical milestone describes the preserved vulnerable pipeline. See
+[Milestone 6](MILESTONE6.md) for current hardened controls and recovery.
+
 Lumen Home now has seven isolated attack-and-observation exercises at
 `http://127.0.0.1:5000/proposal-02/poisoning`. The ordinary approved-answer app
 remains at `/proposal-02`; its publication CLI and 18-case clean benchmark are

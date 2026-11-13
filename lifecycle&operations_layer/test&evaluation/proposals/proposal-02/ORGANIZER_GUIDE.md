@@ -95,4 +95,4 @@ Target approximately 7 to 10 focused working days for a reviewed minimum viable 
 
 ## Implemented Milestone 5
 
-See [controlled poisoning implementation and local acceptance](../../../../lab_platform/proposal2/MILESTONE5.md). Seven isolated scenarios now accompany the independent clean baseline; hardened ingestion and recovery comparisons remain Milestone 6 work.
+See [controlled poisoning implementation and local acceptance](../../../../lab_platform/proposal2/MILESTONE5.md). Seven isolated scenarios now accompany the independent clean baseline; hardened ingestion and recovery comparisons are documented in [Milestone 6](../../../../lab_platform/proposal2/MILESTONE6.md).
