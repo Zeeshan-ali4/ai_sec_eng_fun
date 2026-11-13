@@ -1,5 +1,7 @@
 # Proposal 01 Organizer Guide
 
+For current installation and workshop operations, use the [Host & Organiser Runbook](HOST_FACILITATOR_RUNBOOK.md). This guide retains the original preparation and baseline design context.
+
 ## Baseline to Prepare
 
 Organizers must prepare a simple, fictional product-sales chatbot that can:
