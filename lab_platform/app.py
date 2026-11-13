@@ -26,6 +26,20 @@ def create_app(test_config=None, client=None):
     service = ChatService(model, system_prompt(load_data()), app.config, challenge)
     app.extensions['chat_service'] = service
 
+    from pathlib import Path
+    from .proposal2.knowledge_base import KnowledgeBase
+    from .proposal2.support_service import SupportService
+    from .proposal2.routes import register
+    p2_path = app.config.get('PROPOSAL2_DATABASE_PATH',
+        str(Path(app.config['DATABASE_PATH']).with_name('proposal2.sqlite3')))
+    if Path(p2_path).resolve() == Path(app.config['DATABASE_PATH']).resolve():
+        raise ValueError('Proposal 2 requires a separate database.')
+    p2_kb = KnowledgeBase(p2_path)
+    p2_service = SupportService(p2_kb, model, app.config)
+    app.extensions['proposal2_kb'] = p2_kb
+    app.extensions['proposal2_service'] = p2_service
+    register(app, p2_kb, p2_service)
+
     def sid():
         if 'sid' not in session:
             session['sid'] = secrets.token_urlsafe(32)
