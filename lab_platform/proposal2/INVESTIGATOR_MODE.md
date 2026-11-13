@@ -1,5 +1,7 @@
 # Milestone 6.1: Investigator Mode
 
+[Host & Organiser Runbook](../../lifecycle&operations_layer/test&evaluation/proposals/proposal-02/HOST_FACILITATOR_RUNBOOK.md) covers complete installation, all seven investigations, trusted recovery and workshop facilitation.
+
 Open `http://127.0.0.1:5000/proposal-02/poisoning` after the startup in
 [IMPLEMENTATION.md](IMPLEMENTATION.md). Follow root `SAFETY.md`.
 

@@ -1,5 +1,7 @@
 # Proposal 02 Organizer Guide
 
+[Host & Organiser Runbook](HOST_FACILITATOR_RUNBOOK.md) is the primary operational guide for the implemented Lumen Home Flask lab, including setup, facilitation, evidence and recovery. The preparation material below records the earlier proposal design; use the runbook for current commands and scope.
+
 ## Baseline to Prepare
 
 Organizers must provide a fictional support assistant using one visible adaptation path. The recommended minimum viable path accepts reviewed responses into a local approved-answers knowledge base backed by JSON or SQLite.
