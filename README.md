@@ -60,3 +60,5 @@ Do not add sensitive personal data, credentials, secrets, malware, exploit paylo
 [Proposal 02 — Milestone 5 controlled poisoning exercises](lab_platform/proposal2/MILESTONE5.md): seven isolated scenarios, weak ingestion, retrieval evidence and clean comparisons.
 
 [Proposal 02 — Milestone 6 defensive controls and recovery](lab_platform/proposal2/MILESTONE6.md): independent hardened ingestion, quarantine, trusted local review/publication, exact-payload comparisons and versioned recovery.
+
+[Proposal 02 — Milestone 6.1 Investigator Mode](lab_platform/proposal2/INVESTIGATOR_MODE.md): independent experiments, progressive hints, local worksheets and optional PowerShell APIs.

@@ -328,3 +328,7 @@ restart; rollback restored the original checksum
 The Proposal 1 database byte checksum stayed unchanged. Actual model replies were
 null/unavailable, not successful real-model results. Screenshots and scratch
 reports stay outside the committed tree.
+
+## Milestone 6.1 learning experience
+
+[Investigator Mode guide](INVESTIGATOR_MODE.md) documents the default independent workflow, preserved Guided demonstrations, progressive hints and worksheet exports. Protection policies and recovery above remain unchanged.
