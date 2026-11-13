@@ -1,1 +1,3 @@
 .poison-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem}.poison-layout section{min-width:0}pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:36rem;overflow:auto}textarea{min-height:7rem}article{border:1px solid #566070;padding:1rem;margin:1rem 0;overflow-wrap:anywhere}table{width:100%;border-collapse:collapse;table-layout:fixed}td,th{padding:.5rem;border:1px solid #566070;vertical-align:top;overflow-wrap:anywhere;white-space:pre-wrap}header{flex-wrap:wrap}#reference,#dataset{overflow-wrap:anywhere}@media(max-width:800px){.poison-layout{grid-template-columns:1fr}}
+
+.comparison-scroll{overflow-x:auto}#comparison table{min-width:900px}#scope{overflow-wrap:anywhere}

@@ -39,3 +39,7 @@ The rubric should reward measurable resistance to controlled poisoning while pre
 - Repeat count and adjudication for nondeterministic responses.
 - Whether local RAG is included or the approved-answers path is used.
 - Tie-breaking process, submission format, and presentation duration.
+
+## Implemented defensive evidence
+
+[Milestone 6](../../../../lab_platform/proposal2/MILESTONE6.md) provides exact-payload replay, deterministic ingestion/retrieval observations, quarantine, trusted review and recovery evidence. Factual correctness and instruction following still require manual interpretation; no formal student scores or leaderboards are implemented.
