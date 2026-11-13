@@ -1,5 +1,7 @@
 # Proposal 02 — Milestone 4 clean baseline
 
+The clean behaviour below is preserved. See [Milestone 5 controlled poisoning](MILESTONE5.md) for the separate session-isolated exercise area, local acceptance and evidence workflow.
+
 Lumen Home is a fictional indoor smart-device company, distinct from Fakeford Motors. This milestone supplies clean approved answers, proposed corrections, provenance and a measurable baseline. It does not implement poisoning samples, weakened controls, embeddings, fine-tuning or a facilitator dashboard. Older Proposal 02 builder sketches describe future weak ingestion and Streamlit: use this guide for the current Flask implementation. Follow root `SAFETY.md`.
 
 ## Install and start (Windows PowerShell)

@@ -92,3 +92,7 @@ On representative hardware, install from a clean starting point, run the benchma
 Pin versions, record checksums, capture a clean master package and fallback copy, and distribute only the reviewed challenge materials.
 
 Target approximately 7 to 10 focused working days for a reviewed minimum viable package, excluding approval delays.
+
+## Implemented Milestone 5
+
+See [controlled poisoning implementation and local acceptance](../../../../lab_platform/proposal2/MILESTONE5.md). Seven isolated scenarios now accompany the independent clean baseline; hardened ingestion and recovery comparisons remain Milestone 6 work.

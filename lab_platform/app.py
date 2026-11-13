@@ -39,6 +39,11 @@ def create_app(test_config=None, client=None):
     app.extensions['proposal2_kb'] = p2_kb
     app.extensions['proposal2_service'] = p2_service
     register(app, p2_kb, p2_service)
+    from .proposal2.poisoning_service import PoisoningService
+    from .proposal2.poisoning_routes import register as register_poisoning
+    poisoning = PoisoningService(p2_kb, model, app.config)
+    app.extensions['poisoning_service'] = poisoning
+    register_poisoning(app, poisoning)
 
     def sid():
         if 'sid' not in session:
