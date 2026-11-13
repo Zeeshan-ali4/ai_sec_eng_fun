@@ -52,3 +52,7 @@ Do not add sensitive personal data, credentials, secrets, malware, exploit paylo
 [Proposal 01 Host & Organiser Runbook](lifecycle&operations_layer/test&evaluation/proposals/proposal-01/HOST_FACILITATOR_RUNBOOK.md): primary guide for installation, facilitation, evidence, reset and recovery.
 
 [Fakeford Motors security lab — Milestone 3](lab_platform/README.md): local Flask/Ollama lab with five challenges, vulnerable and hardened modes, isolated synthetic data, evidence and automated evaluation.
+
+## Proposal 02 clean adaptive support baseline — Milestone 4
+
+[Lumen Home implementation and commands](lab_platform/proposal2/IMPLEMENTATION.md): independent support assistant at `http://127.0.0.1:5000/proposal-02`, 24 approved SQLite-backed articles, pending proposals, local organiser review/publication, provenance, an 18-case clean benchmark and isolated reset. Start with `python -m lab_platform.app` after the shared installation. This milestone does not enable poisoning or the weak ingestion described in earlier builder sketches. Proposal 1 remains available at `/`, with its existing host runbook unchanged.

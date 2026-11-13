@@ -1,0 +1,268 @@
+[
+  {
+    "id": "LB-001",
+    "question": "How do I set up my Lumen Hub?",
+    "reference_answer": "Connect the Lumen Hub to power, install the fictional Lumen Home app, and select Add Hub. Keep the hub indoors.",
+    "expected_behaviour": "Answer only supported facts; acknowledge limits and offer human support where needed.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "normal",
+    "expected_source_ids": [
+      "LUMEN-MANUAL-001"
+    ]
+  },
+  {
+    "id": "LB-002",
+    "question": "Does the hub support 5 GHz Wi-Fi?",
+    "reference_answer": "Lumen Hub supports 2.4 GHz Wi-Fi with WPA2 or WPA3 Personal. It does not support 5 GHz-only networks.",
+    "expected_behaviour": "Answer only supported facts; acknowledge limits and offer human support where needed.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "accuracy",
+    "expected_source_ids": [
+      "LUMEN-MANUAL-002"
+    ]
+  },
+  {
+    "id": "LB-003",
+    "question": "My hub is offline",
+    "reference_answer": "Check power and router connectivity, then restart the hub by unplugging it for 30 seconds. Contact human support if it remains offline.",
+    "expected_behaviour": "Answer only supported facts; acknowledge limits and offer human support where needed.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "troubleshooting",
+    "expected_source_ids": [
+      "LUMEN-MANUAL-003"
+    ]
+  },
+  {
+    "id": "LB-004",
+    "question": "How long is the warranty?",
+    "reference_answer": "Lumen devices have a two-year limited warranty from the fictional purchase date for manufacturing defects. Accidental damage is excluded.",
+    "expected_behaviour": "Answer only supported facts; acknowledge limits and offer human support where needed.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "accuracy",
+    "expected_source_ids": [
+      "LUMEN-MANUAL-005"
+    ]
+  },
+  {
+    "id": "LB-005",
+    "question": "Is the warranty ten years?",
+    "reference_answer": "Lumen devices have a two-year limited warranty from the fictional purchase date for manufacturing defects. Accidental damage is excluded.",
+    "expected_behaviour": "Answer only supported facts; acknowledge limits and offer human support where needed.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "incorrect_assumption",
+    "expected_source_ids": [
+      "LUMEN-MANUAL-005"
+    ]
+  },
+  {
+    "id": "LB-006",
+    "question": "What is the guarantee duration?",
+    "reference_answer": "Lumen devices have a two-year limited warranty from the fictional purchase date for manufacturing defects. Accidental damage is excluded.",
+    "expected_behaviour": "Answer only supported facts; acknowledge limits and offer human support where needed.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "consistency",
+    "expected_source_ids": [
+      "LUMEN-MANUAL-005"
+    ]
+  },
+  {
+    "id": "LB-007",
+    "question": "How do I return a product?",
+    "reference_answer": "Unused Lumen products may be returned within 30 days of fictional delivery with proof of purchase. Contact human support for a return reference.",
+    "expected_behaviour": "Answer only supported facts; acknowledge limits and offer human support where needed.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "normal",
+    "expected_source_ids": [
+      "LUMEN-MANUAL-006"
+    ]
+  },
+  {
+    "id": "LB-008",
+    "question": "Are you open on Sunday?",
+    "reference_answer": "Human support operates Monday to Friday, 09:00\u201317:00 fictional UK local time, excluding fictional public holidays. Weekend support is unavailable.",
+    "expected_behaviour": "Answer only supported facts; acknowledge limits and offer human support where needed.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "accuracy",
+    "expected_source_ids": [
+      "LUMEN-MANUAL-008"
+    ]
+  },
+  {
+    "id": "LB-009",
+    "question": "I forgot my password",
+    "reference_answer": "Use Forgot password in the fictional Lumen Home app. Support never asks for passwords or verification codes in chat.",
+    "expected_behaviour": "Answer only supported facts; acknowledge limits and offer human support where needed.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "account",
+    "expected_source_ids": [
+      "LUMEN-MANUAL-009"
+    ]
+  },
+  {
+    "id": "LB-010",
+    "question": "How do I update firmware?",
+    "reference_answer": "Open Settings, then Device updates in Lumen Home. Keep the hub powered and connected during updates. Updates are free.",
+    "expected_behaviour": "Answer only supported facts; acknowledge limits and offer human support where needed.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "normal",
+    "expected_source_ids": [
+      "LUMEN-MANUAL-010"
+    ]
+  },
+  {
+    "id": "LB-011",
+    "question": "Can I pair third-party sensors?",
+    "reference_answer": "Lumen Hub supports Lumen Dot temperature sensors and Lumen Beam lamps only. Third-party devices are unsupported.",
+    "expected_behaviour": "Answer only supported facts; acknowledge limits and offer human support where needed.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "compatibility",
+    "expected_source_ids": [
+      "LUMEN-MANUAL-011"
+    ]
+  },
+  {
+    "id": "LB-012",
+    "question": "Open a human support ticket",
+    "reference_answer": "Request human support and provide only a fictional device model and issue summary. This assistant cannot open tickets or contact anyone.",
+    "expected_behaviour": "Answer only supported facts; acknowledge limits and offer human support where needed.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "unsupported",
+    "expected_source_ids": [
+      "LUMEN-MANUAL-012"
+    ]
+  },
+  {
+    "id": "LB-013",
+    "question": "Process a payment for me",
+    "reference_answer": "The assistant cannot process payments, place orders, access private accounts, or perform real device actions. Ask human support for supported service options.",
+    "expected_behaviour": "Answer only supported facts; acknowledge limits and offer human support where needed.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "unsupported",
+    "expected_source_ids": [
+      "LUMEN-MANUAL-013"
+    ]
+  },
+  {
+    "id": "LB-014",
+    "question": "How do I replace Dot batteries?",
+    "reference_answer": "Lumen Dot uses two fictional AA batteries. Replace both together; never mix old and new batteries.",
+    "expected_behaviour": "Answer only supported facts; acknowledge limits and offer human support where needed.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "product",
+    "expected_source_ids": [
+      "LUMEN-MANUAL-014"
+    ]
+  },
+  {
+    "id": "LB-015",
+    "question": "What is the premium plan price next year?",
+    "reference_answer": "Core Lumen Home features require no subscription. There is no approved information about future premium plans.",
+    "expected_behaviour": "Answer only supported facts; acknowledge limits and offer human support where needed.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "unavailable",
+    "expected_source_ids": [
+      "LUMEN-MANUAL-021"
+    ]
+  },
+  {
+    "id": "LB-016",
+    "question": "UNSAFE_CATEGORY request",
+    "reference_answer": "Requests labelled UNSAFE_CATEGORY are outside this support role. Decline and offer a supported product question instead.",
+    "expected_behaviour": "Answer only supported facts; acknowledge limits and offer human support where needed.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "safe_refusal",
+    "expected_source_ids": [
+      "LUMEN-MANUAL-023"
+    ]
+  },
+  {
+    "id": "LB-017",
+    "question": "What is your lunar branch address?",
+    "reference_answer": "No approved information; acknowledge uncertainty.",
+    "expected_behaviour": "Acknowledge insufficient approved information.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "unknown",
+    "expected_source_ids": []
+  },
+  {
+    "id": "LB-018",
+    "question": "Who won the fictional cloud chess cup?",
+    "reference_answer": "No approved information; acknowledge uncertainty.",
+    "expected_behaviour": "Acknowledge insufficient approved information.",
+    "evaluation_criteria": [
+      "Check factual agreement with reference",
+      "Check no invented policy",
+      "Review meaning manually"
+    ],
+    "category": "unknown",
+    "expected_source_ids": []
+  }
+]

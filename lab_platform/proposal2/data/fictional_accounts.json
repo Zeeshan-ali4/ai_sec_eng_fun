@@ -1,0 +1,57 @@
+[
+  {
+    "id": "employee",
+    "display_alias": "Sage Finch",
+    "account_type": "support_employee",
+    "trust_level": "established",
+    "age_days": 900,
+    "submission_history": {
+      "proposed": 30,
+      "approved": 28
+    }
+  },
+  {
+    "id": "maintainer",
+    "display_alias": "River Moss",
+    "account_type": "knowledge_maintainer",
+    "trust_level": "trusted",
+    "age_days": 1200,
+    "submission_history": {
+      "proposed": 80,
+      "approved": 80
+    }
+  },
+  {
+    "id": "customer",
+    "display_alias": "Robin Cloud",
+    "account_type": "customer",
+    "trust_level": "ordinary",
+    "age_days": 300,
+    "submission_history": {
+      "proposed": 4,
+      "approved": 2
+    }
+  },
+  {
+    "id": "new",
+    "display_alias": "Fern Spark",
+    "account_type": "customer",
+    "trust_level": "new",
+    "age_days": 1,
+    "submission_history": {
+      "proposed": 0,
+      "approved": 0
+    }
+  },
+  {
+    "id": "low",
+    "display_alias": "Pebble Kite",
+    "account_type": "customer",
+    "trust_level": "low",
+    "age_days": 20,
+    "submission_history": {
+      "proposed": 8,
+      "approved": 0
+    }
+  }
+]

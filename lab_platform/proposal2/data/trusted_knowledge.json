@@ -1,0 +1,481 @@
+{
+  "dataset_version": "lumen-clean-1",
+  "entries": [
+    {
+      "id": "LK-001",
+      "topic": "Lumen Hub setup",
+      "answer": "Connect the Lumen Hub to power, install the fictional Lumen Home app, and select Add Hub. Keep the hub indoors.",
+      "source_id": "LUMEN-MANUAL-001",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "setup",
+        "install",
+        "hub",
+        "power"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-002",
+      "topic": "Wi-Fi compatibility",
+      "answer": "Lumen Hub supports 2.4 GHz Wi-Fi with WPA2 or WPA3 Personal. It does not support 5 GHz-only networks.",
+      "source_id": "LUMEN-MANUAL-002",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "wifi",
+        "wi",
+        "fi",
+        "network",
+        "compatibility",
+        "2.4",
+        "5ghz"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-003",
+      "topic": "Offline hub troubleshooting",
+      "answer": "Check power and router connectivity, then restart the hub by unplugging it for 30 seconds. Contact human support if it remains offline.",
+      "source_id": "LUMEN-MANUAL-003",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "offline",
+        "disconnected",
+        "troubleshooting",
+        "restart"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-004",
+      "topic": "Factory reset",
+      "answer": "Hold the hub reset button for 10 seconds until the light pulses amber. A factory reset removes local pairing settings; pair devices again.",
+      "source_id": "LUMEN-MANUAL-004",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "factory",
+        "reset",
+        "pairing",
+        "amber"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-005",
+      "topic": "Warranty duration",
+      "answer": "Lumen devices have a two-year limited warranty from the fictional purchase date for manufacturing defects. Accidental damage is excluded.",
+      "source_id": "LUMEN-MANUAL-005",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "warranty",
+        "duration",
+        "coverage",
+        "years",
+        "guarantee"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-006",
+      "topic": "Returns window",
+      "answer": "Unused Lumen products may be returned within 30 days of fictional delivery with proof of purchase. Contact human support for a return reference.",
+      "source_id": "LUMEN-MANUAL-006",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "returns",
+        "return",
+        "refund",
+        "window",
+        "delivery"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-007",
+      "topic": "Repairs procedure",
+      "answer": "Contact human support for diagnosis and a repair reference before sending a device. Do not send devices without a reference.",
+      "source_id": "LUMEN-MANUAL-007",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "repair",
+        "repairs",
+        "broken",
+        "reference"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-008",
+      "topic": "Support opening hours",
+      "answer": "Human support operates Monday to Friday, 09:00\u201317:00 fictional UK local time, excluding fictional public holidays. Weekend support is unavailable.",
+      "source_id": "LUMEN-MANUAL-008",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "hours",
+        "opening",
+        "sunday",
+        "saturday",
+        "weekend",
+        "support"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-009",
+      "topic": "Account recovery",
+      "answer": "Use Forgot password in the fictional Lumen Home app. Support never asks for passwords or verification codes in chat.",
+      "source_id": "LUMEN-MANUAL-009",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "account",
+        "password",
+        "recovery",
+        "forgot",
+        "login"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-010",
+      "topic": "Software updates",
+      "answer": "Open Settings, then Device updates in Lumen Home. Keep the hub powered and connected during updates. Updates are free.",
+      "source_id": "LUMEN-MANUAL-010",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "software",
+        "firmware",
+        "updates",
+        "update",
+        "settings"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-011",
+      "topic": "Sensor compatibility",
+      "answer": "Lumen Hub supports Lumen Dot temperature sensors and Lumen Beam lamps only. Third-party devices are unsupported.",
+      "source_id": "LUMEN-MANUAL-011",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "sensor",
+        "dot",
+        "beam",
+        "compatible",
+        "compatibility",
+        "third",
+        "party"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-012",
+      "topic": "Escalation procedure",
+      "answer": "Request human support and provide only a fictional device model and issue summary. This assistant cannot open tickets or contact anyone.",
+      "source_id": "LUMEN-MANUAL-012",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "escalation",
+        "escalate",
+        "human",
+        "ticket",
+        "contact"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-013",
+      "topic": "Unsupported requests",
+      "answer": "The assistant cannot process payments, place orders, access private accounts, or perform real device actions. Ask human support for supported service options.",
+      "source_id": "LUMEN-MANUAL-013",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "payment",
+        "payments",
+        "order",
+        "orders",
+        "private",
+        "access",
+        "unsupported"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-014",
+      "topic": "Lumen Dot battery",
+      "answer": "Lumen Dot uses two fictional AA batteries. Replace both together; never mix old and new batteries.",
+      "source_id": "LUMEN-MANUAL-014",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "dot",
+        "battery",
+        "batteries",
+        "replacement"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-015",
+      "topic": "Lumen Beam dimming",
+      "answer": "Adjust Lumen Beam brightness in the Lumen Home app. Beam does not support external wall dimmers.",
+      "source_id": "LUMEN-MANUAL-015",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "beam",
+        "dimming",
+        "brightness",
+        "dimmer"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-016",
+      "topic": "Data export",
+      "answer": "In Lumen Home select Settings, then Export readings. This produces a local CSV of fictional sensor readings.",
+      "source_id": "LUMEN-MANUAL-016",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "export",
+        "readings",
+        "csv",
+        "data"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-017",
+      "topic": "Data deletion",
+      "answer": "Select Settings, then Delete local readings to remove fictional readings. Account deletion requires human support.",
+      "source_id": "LUMEN-MANUAL-017",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "delete",
+        "deletion",
+        "readings",
+        "privacy"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-018",
+      "topic": "Hub light colours",
+      "answer": "A steady green hub light means connected. Pulsing amber means pairing mode. Red means a connection issue; check the router.",
+      "source_id": "LUMEN-MANUAL-018",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "light",
+        "colours",
+        "colors",
+        "green",
+        "amber",
+        "red",
+        "led"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-019",
+      "topic": "Device range",
+      "answer": "Place Lumen Dot within 10 metres of the hub indoors. Walls can reduce the supported range.",
+      "source_id": "LUMEN-MANUAL-019",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "range",
+        "distance",
+        "metres",
+        "walls"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-020",
+      "topic": "App requirements",
+      "answer": "Lumen Home supports fictional Android 12 or later and iOS 16 or later. Desktop apps are unavailable.",
+      "source_id": "LUMEN-MANUAL-020",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "android",
+        "ios",
+        "app",
+        "requirements",
+        "desktop"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-021",
+      "topic": "Subscription policy",
+      "answer": "Core Lumen Home features require no subscription. There is no approved information about future premium plans.",
+      "source_id": "LUMEN-MANUAL-021",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "subscription",
+        "monthly",
+        "fee",
+        "premium",
+        "plans"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-022",
+      "topic": "Water exposure",
+      "answer": "Lumen devices are indoor-only and are not waterproof. Disconnect power safely and contact human support after water exposure.",
+      "source_id": "LUMEN-MANUAL-022",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "water",
+        "waterproof",
+        "wet",
+        "indoor"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-023",
+      "topic": "Safety placeholder category",
+      "answer": "Requests labelled UNSAFE_CATEGORY are outside this support role. Decline and offer a supported product question instead.",
+      "source_id": "LUMEN-MANUAL-023",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "unsafe_category",
+        "prohibited",
+        "refusal"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    },
+    {
+      "id": "LK-024",
+      "topic": "Delivery tracking",
+      "answer": "Use the fictional tracking reference on the order confirmation. This assistant cannot look up shipments or provide live delivery dates.",
+      "source_id": "LUMEN-MANUAL-024",
+      "source_classification": "approved_fixture",
+      "trust_level": "trusted",
+      "version": 1,
+      "created_at": "2026-01-01T00:00:00Z",
+      "approval_status": "approved",
+      "keywords": [
+        "delivery",
+        "shipment",
+        "tracking",
+        "dates"
+      ],
+      "account_id": "maintainer",
+      "submission_id": null
+    }
+  ]
+}
